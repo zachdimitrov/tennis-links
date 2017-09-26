@@ -91,6 +91,12 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TennisLinks.Web\TennisLinks.Web.csproj">
+      <Project>{8DE5DBED-955E-44C1-8766-81D07650A2CB}</Project>
+      <Name>TennisLinks.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -54,15 +54,15 @@ namespace TennisLinks.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "117037575654414",
+               appSecret: "85ca8200a2ee1e84c5f96c1bdc4bbff3");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "583239858272-bp0ft2lc5qb74v8g3id7girh0aaf9hqh.apps.googleusercontent.com",
+                ClientSecret = "Bsm4aLOTREdN3arpxgeoJ0UY"
+            });
         }
     }
 }
