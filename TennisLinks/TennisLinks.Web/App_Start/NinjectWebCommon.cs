@@ -10,10 +10,6 @@ namespace TennisLinks.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
-    using System.Reflection;
-    using Infrastructure.Constants;
-    using System.Linq;
-    using Infrastructure.Registries;
 
     public static class NinjectWebCommon
     {
