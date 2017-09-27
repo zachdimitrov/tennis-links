@@ -5,7 +5,6 @@ using System.Web.Routing;
 using TennisLinks.Data;
 using TennisLinks.Data.Migrations;
 using TennisLinks.Web.App_Start;
-using TennisLinks.Web.Infrastructure.ModelBinders;
 
 namespace TennisLinks.Web
 {
@@ -15,13 +14,11 @@ namespace TennisLinks.Web
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TennisLinksDbContext, Configuration>());
 
+            ViewEngineConfig.RemoveUnusedViewEngines();
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            AutoMapperConfig.RegisterMappings();
-            ModelBinderProviders.BinderProviders.Add(new EntityModelBinderProvider());
         }
     }
 }
