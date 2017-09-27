@@ -65,16 +65,6 @@ namespace TennisLinks.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            var registries =
-                Assembly.Load(Assemblies.Infrastructure)
-                .GetExportedTypes()
-                .Where(t => t.IsClass && typeof(INinjectRegistry).IsAssignableFrom(t));
-
-            foreach (var registry in registries)
-            {
-                var registryInstance = (INinjectRegistry)Activator.CreateInstance(registry);
-                registryInstance.Register(kernel);
-            }
         }
     }
 }

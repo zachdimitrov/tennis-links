@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TennisLinks.Data.Interfaces;
+﻿using TennisLinks.Data.Interfaces;
 using TennisLinks.Models;
 
 namespace TennisLinks.Data.Repositories

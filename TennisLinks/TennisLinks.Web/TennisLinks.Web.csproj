@@ -214,7 +214,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -307,10 +306,6 @@
     <ProjectReference Include="..\TennisLinks.Data\TennisLinks.Data.csproj">
       <Project>{1002FBB5-23A0-49B6-815E-25CEB23972B1}</Project>
       <Name>TennisLinks.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TennisLinks.Web.Infrastructure\TennisLinks.Web.Infrastructure.csproj">
-      <Project>{E579B9B7-F112-458D-8AEA-783BC7C118E9}</Project>
-      <Name>TennisLinks.Web.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
