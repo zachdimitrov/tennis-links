@@ -1,21 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TennisLinks.Models.Abstracts;
 using TennisLinks.Models.Enumerations;
 
 namespace TennisLinks.Models
 {
-    public class PlayTime
+    public class PlayTime : DataModel
     {
         private ICollection<User> users;
 
         public PlayTime()
         {
-            this.Id = (int)this.Time;
             this.users = new HashSet<User>();
         }
-
-        [Key]
-        public int Id { get; set; }
 
         [Required]
         public TimeOfDay Time { get; set; }

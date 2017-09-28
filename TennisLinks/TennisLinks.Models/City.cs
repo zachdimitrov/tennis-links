@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TennisLinks.Models.Abstracts;
-using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
 {

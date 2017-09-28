@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using TennisLinks.Models.Abstracts;
 using TennisLinks.Models.Enumerations;
-using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
 {
@@ -20,8 +19,6 @@ namespace TennisLinks.Models
         public string Name { get; set; }
 
         public Surface SurfaceType { get; set; }
-
-        public int CityId { get; set; }
 
         public virtual City City { get; set; }
 

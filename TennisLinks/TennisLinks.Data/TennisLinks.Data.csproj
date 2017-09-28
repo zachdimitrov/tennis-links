@@ -57,10 +57,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201709280011044_initial.cs" />
-    <Compile Include="Migrations\201709280011044_initial.Designer.cs">
-      <DependentUpon>201709280011044_initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Repositories\EfRepository.cs" />
     <Compile Include="Interfaces\IMsSqlDbContext.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -77,11 +73,6 @@
       <Project>{0770a349-86ed-46c2-bf28-81d961dbbac4}</Project>
       <Name>TennisLinks.Models</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709280011044_initial.resx">
-      <DependentUpon>201709280011044_initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

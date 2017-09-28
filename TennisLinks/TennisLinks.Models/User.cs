@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using TennisLinks.Models.Enumerations;
+using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class User : IdentityUser
+    public class User : IdentityUser, IAuditable, IDeletable
     {
         private ICollection<PlayTime> playTimes;
         private ICollection<Club> clubs;
@@ -32,6 +34,18 @@ namespace TennisLinks.Models
         public int CityId { get; set; }
 
         public virtual City City { get; set; }
+
+        [Index]
+        public bool IsDeleted { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? CreatedOn { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? DeletedOn { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime? ModifiedOn { get; set; }
 
         public virtual ICollection<PlayTime> PlayTimes
         {
