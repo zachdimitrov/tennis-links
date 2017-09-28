@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TennisLinks.Models.Abstracts;
 using TennisLinks.Models.Enumerations;
 using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
 {
-    public class Club : IEntity
+    public class Club : DataModel
     {
         private ICollection<User> users;
 
@@ -13,8 +14,6 @@ namespace TennisLinks.Models
         {
             this.users = new HashSet<User>();
         }
-
-        public int Id { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 3)]

@@ -15,7 +15,7 @@ namespace TennisLinks.Models
         }
 
         [Key]
-        public int Id;
+        public int Id { get; set; }
 
         [Required]
         public TimeOfDay Time { get; set; }

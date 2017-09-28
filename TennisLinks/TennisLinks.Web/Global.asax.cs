@@ -12,7 +12,7 @@ namespace TennisLinks.Web
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TennisLinksDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MsSqlDbContext, Configuration>());
 
             ViewEngineConfig.RemoveUnusedViewEngines();
             AreaRegistration.RegisterAllAreas();

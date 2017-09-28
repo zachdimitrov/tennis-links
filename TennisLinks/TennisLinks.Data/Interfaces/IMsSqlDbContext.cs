@@ -4,7 +4,7 @@ using TennisLinks.Models;
 
 namespace TennisLinks.Data.Interfaces
 {
-    public interface ITennisLinksDbContext
+    public interface IMsSqlDbContext
     {
         IDbSet<Message> Messages { get; set; }
 

@@ -10,6 +10,11 @@ namespace TennisLinks.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using Ninject.Extensions.Conventions;
+    using Data.Repositories;
+    using Data.Interfaces;
+    using System.Data.Entity;
+    using Data;
 
     public static class NinjectWebCommon
     {
@@ -61,6 +66,15 @@ namespace TennisLinks.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            kernel.Bind(x =>
+            {
+                x.FromThisAssembly()
+                 .SelectAllClasses()
+                 .BindDefaultInterface();
+            });
+
+            kernel.Bind(typeof(DbContext), typeof(IMsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
+            kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
         }
     }
 }

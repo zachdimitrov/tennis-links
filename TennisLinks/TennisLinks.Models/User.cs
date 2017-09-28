@@ -1,11 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using TennisLinks.Models.Enumerations;
 
 namespace TennisLinks.Models
 {
-    public class User
+    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+    public class User : IdentityUser
     {
         private ICollection<PlayTime> playTimes;
         private ICollection<Club> clubs;
@@ -15,15 +20,6 @@ namespace TennisLinks.Models
             this.playTimes = new HashSet<PlayTime>();
             this.clubs = new HashSet<Club>();
         }
-
-        public string Id { get; set; }
-
-        [Column("Email")]
-        public string Email { get; set; }
-
-        [Required]
-        [StringLength(50, MinimumLength = 3)]
-        public string Username { get; set; }
 
         [Required]
         public int Age { get; set; }
@@ -47,6 +43,14 @@ namespace TennisLinks.Models
         {
             get { return this.clubs; }
             set { this.clubs = value; }
+        }
+
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
+        {
+            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
+            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
+            // Add custom user claims here
+            return userIdentity;
         }
     }
 }
