@@ -2,7 +2,6 @@
 using System;
 using System.Data.Entity;
 using System.Linq;
-using TennisLinks.Data.Interfaces;
 using TennisLinks.Models;
 using TennisLinks.Models.Interfaces;
 
@@ -21,11 +20,11 @@ namespace TennisLinks.Data
 
         public virtual IDbSet<Message> Messages { get; set; }
 
-        //public virtual IDbSet<User> Users { get; set; }
-
         public virtual IDbSet<Club> Clubs { get; set; }
 
         public virtual IDbSet<City> Cities { get; set; }
+
+        public virtual IDbSet<PlayTime> PlayTimes { get; set; }
 
         public new IDbSet<T> Set<T>() where T : class
         {
