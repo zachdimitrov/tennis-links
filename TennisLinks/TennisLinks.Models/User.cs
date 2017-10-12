@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using TennisLinks.Models.Attributes;
 using TennisLinks.Models.Enumerations;
 using TennisLinks.Models.Interfaces;
 
@@ -28,10 +29,13 @@ namespace TennisLinks.Models
 
         public Gender Gender { get; set; }
 
-        [Column("Skill Level")]
-        public double Skill { get; set; }
+        [Required]
+        [StringLength(250, MinimumLength = 10)]
+        public string Info { get; set; }
 
-        public int CityId { get; set; }
+        [Column("Skill Level")]
+        [SkillValidation]
+        public double Skill { get; set; }
 
         public virtual City City { get; set; }
 

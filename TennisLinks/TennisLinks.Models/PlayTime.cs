@@ -14,6 +14,12 @@ namespace TennisLinks.Models
             this.users = new HashSet<User>();
         }
 
+        public PlayTime(TimeOfDay time)
+        {
+            this.Time = time;
+            this.users = new HashSet<User>();
+        }
+
         [Required]
         public TimeOfDay Time { get; set; }
 
