@@ -99,6 +99,7 @@ namespace TennisLinks.Data.Migrations
                     Age = 35,
                     Gender = Gender.Male,
                     Skill = 2.5,
+                    Info = "Hi, I am looking for somebody to play with. I am a beginner but sometimes can be tough opponent when I have a good day."
                 };
 
                 user.Clubs.Add(context.Clubs.First());
