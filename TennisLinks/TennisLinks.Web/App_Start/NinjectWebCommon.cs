@@ -14,6 +14,7 @@ namespace TennisLinks.Web.App_Start
     using Data.Repositories;
     using Data.Interfaces;
     using System.Data.Entity;
+    using Services.Interfaces;
     using Data;
 
     public static class NinjectWebCommon
@@ -73,7 +74,14 @@ namespace TennisLinks.Web.App_Start
                  .BindDefaultInterface();
             });
 
-            kernel.Bind(typeof(DbContext), typeof(IMsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
+            kernel.Bind(x =>
+            {
+                x.FromAssemblyContaining(typeof(IDataService))
+                 .SelectAllClasses()
+                 .BindDefaultInterface();
+            });
+
+            kernel.Bind(typeof(DbContext), typeof(MsSqlDbContext)).To<MsSqlDbContext>().InRequestScope();
             kernel.Bind(typeof(IEfRepository<>)).To(typeof(EfRepository<>));
         }
     }

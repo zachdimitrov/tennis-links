@@ -18,7 +18,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44339</IISExpressSSLPort>
+    <IISExpressSSLPort>44368</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode />
@@ -253,6 +253,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Home\PostViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -335,6 +336,10 @@
     <ProjectReference Include="..\TennisLinks.Models\TennisLinks.Models.csproj">
       <Project>{0770A349-86ED-46C2-BF28-81D961DBBAC4}</Project>
       <Name>TennisLinks.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TennisLinks.Services\TennisLinks.Services.csproj">
+      <Project>{f3c644b9-7c70-4531-baa6-6174f5a1054e}</Project>
+      <Name>TennisLinks.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
