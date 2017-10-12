@@ -19,16 +19,19 @@ namespace TennisLinks.Data.Migrations
 
         protected override void Seed(MsSqlDbContext context)
         {
-            const string AdministratorUserName = "info@tennislinks.win";
-            const string AdministratorPassword = "123456";
+            const string AdministratorUserName = "admin";
+            const string AdministratorEmail = "info@tennislinks.win";
+            const string AdministratorPassword = "123qwe";
             const string CityName = "Sofia";
             const string ClubName = "Akademik";
 
+            this.CreatePlayTimes(context);
             this.SampleCity(context, CityName);
             this.SampleClub(context, ClubName);
             this.SeedAdmin(
                 context, 
-                AdministratorUserName, 
+                AdministratorUserName,
+                AdministratorEmail,
                 AdministratorPassword, 
                 CityName);
         }
@@ -37,12 +40,14 @@ namespace TennisLinks.Data.Migrations
         {
             if (!context.PlayTimes.Any())
             {
-                context.PlayTimes.Add(new PlayTime(TimeOfDay.morning));
-                context.PlayTimes.Add(new PlayTime(TimeOfDay.lunch));
-                context.PlayTimes.Add(new PlayTime(TimeOfDay.afternoon));
-                context.PlayTimes.Add(new PlayTime(TimeOfDay.evening));
-                context.PlayTimes.Add(new PlayTime(TimeOfDay.night));
+                context.PlayTimes.Add(new PlayTime(TimeOfDay.morning, DateTime.Now));
+                context.PlayTimes.Add(new PlayTime(TimeOfDay.lunch, DateTime.Now));
+                context.PlayTimes.Add(new PlayTime(TimeOfDay.afternoon, DateTime.Now));
+                context.PlayTimes.Add(new PlayTime(TimeOfDay.evening, DateTime.Now));
+                context.PlayTimes.Add(new PlayTime(TimeOfDay.night, DateTime.Now));
             }
+
+            context.SaveChanges();
         }
 
         private void SampleCity(IMsSqlDbContext context, string CityName)
@@ -56,6 +61,7 @@ namespace TennisLinks.Data.Migrations
                 };
 
                 context.Cities.Add(city);
+                context.SaveChanges();
             }
         }
 
@@ -72,34 +78,40 @@ namespace TennisLinks.Data.Migrations
                 };
 
                 context.Clubs.Add(club);
+                context.SaveChanges();
             }
         }
 
         private void SeedAdmin(MsSqlDbContext context, 
             string AdministratorUserName, 
+            string AdministratorEmail,
             string AdministratorPassword, 
             string CityName)
         {
 
             if (!context.Roles.Any())
             {
+                // create roles for all other users here 
                 var roleStore = new RoleStore<IdentityRole>(context);
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
-                var role = new IdentityRole { Name = "Admin" };
-                roleManager.Create(role);
+                var adminRole = new IdentityRole { Name = "Admin" };
+                var regularRole = new IdentityRole { Name = "Regular" };
+                roleManager.Create(adminRole);
+                roleManager.Create(regularRole);
 
                 var userStore = new UserStore<User>(context);
                 var userManager = new UserManager<User>(userStore);
                 var user = new User
                 {
                     UserName = AdministratorUserName,
-                    Email = AdministratorUserName,
+                    Email = AdministratorEmail,
                     EmailConfirmed = true,
                     City = context.Cities.First(),
                     Age = 35,
                     Gender = Gender.Male,
                     Skill = 2.5,
-                    Info = "Hi, I am looking for somebody to play with. I am a beginner but sometimes can be tough opponent when I have a good day."
+                    Info = "Tennis Links app administrator. If you have any troubles or requests do not hesitate to contact me!",
+                    CreatedOn = DateTime.Now
                 };
 
                 user.Clubs.Add(context.Clubs.First());
@@ -107,8 +119,9 @@ namespace TennisLinks.Data.Migrations
                 user.PlayTimes.Add(context.PlayTimes.First(p => p.Time == TimeOfDay.evening));
 
                 userManager.Create(user, AdministratorPassword);
+                userManager.AddToRole(user.Id, adminRole.Name);
 
-                userManager.AddToRole(user.Id, "Admin");
+                context.SaveChanges();
             }
         }
     }

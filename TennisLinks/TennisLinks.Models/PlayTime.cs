@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using TennisLinks.Models.Abstracts;
 using TennisLinks.Models.Enumerations;
@@ -14,9 +15,10 @@ namespace TennisLinks.Models
             this.users = new HashSet<User>();
         }
 
-        public PlayTime(TimeOfDay time)
+        public PlayTime(TimeOfDay time, DateTime createdOn)
         {
             this.Time = time;
+            this.CreatedOn = createdOn;
             this.users = new HashSet<User>();
         }
 

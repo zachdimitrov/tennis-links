@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\DataModel.cs" />
+    <Compile Include="Attributes\SkillValidationAttribute.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Club.cs" />
     <Compile Include="Constants\Numeric.cs" />
