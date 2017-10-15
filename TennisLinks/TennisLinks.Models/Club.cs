@@ -7,11 +7,11 @@ namespace TennisLinks.Models
 {
     public class Club : DataModel
     {
-        private ICollection<User> users;
+        private ICollection<Details> userDetails;
 
         public Club()
         {
-            this.users = new HashSet<User>();
+            this.userDetails = new HashSet<Details>();
         }
 
         [Required]
@@ -22,10 +22,10 @@ namespace TennisLinks.Models
 
         public virtual City City { get; set; }
 
-        public virtual ICollection<User> Users
+        public virtual ICollection<Details> UserDetails
         {
-            get { return this.users; }
-            set { this.users = value; }
+            get { return this.userDetails; }
+            set { this.userDetails = value; }
         }
     }
 }

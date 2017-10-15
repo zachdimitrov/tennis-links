@@ -6,8 +6,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using TennisLinks.Models.Attributes;
-using TennisLinks.Models.Enumerations;
 using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
@@ -15,29 +13,12 @@ namespace TennisLinks.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class User : IdentityUser, IAuditable, IDeletable
     {
-        private ICollection<PlayTime> playTimes;
-        private ICollection<Club> clubs;
+        private ICollection<Message> messages;
 
         public User()
         {
-            this.playTimes = new HashSet<PlayTime>();
-            this.clubs = new HashSet<Club>();
+            this.messages = new HashSet<Message>();
         }
-
-        [Required]
-        public int Age { get; set; }
-
-        public Gender Gender { get; set; }
-
-        [Required]
-        [StringLength(250, MinimumLength = 10)]
-        public string Info { get; set; }
-
-        [Column("Skill Level")]
-        [SkillValidation]
-        public double Skill { get; set; }
-
-        public virtual City City { get; set; }
 
         [Index]
         public bool IsDeleted { get; set; }
@@ -51,16 +32,12 @@ namespace TennisLinks.Models
         [DataType(DataType.DateTime)]
         public DateTime? ModifiedOn { get; set; }
 
-        public virtual ICollection<PlayTime> PlayTimes
-        {
-            get { return this.playTimes; }
-            set { this.playTimes = value; }
-        }
+        public Details Details { get; set; }
 
-        public virtual ICollection<Club> Clubs
+        public virtual ICollection<Message> Messages
         {
-            get { return this.clubs; }
-            set { this.clubs = value; }
+            get { return this.messages; }
+            set { this.messages = value; }
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)

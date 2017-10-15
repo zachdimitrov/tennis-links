@@ -13,8 +13,10 @@ namespace TennisLinks.Models
         [StringLength(250, MinimumLength = 10)]
         public string Content { get; set; }
 
-        public virtual User Contact { get; set; }
+        [Required]
+        public string Author { get; set; }
 
-        public virtual User Author { get; set; }
+        [Required]
+        public string Recipient { get; set; }
     }
 }

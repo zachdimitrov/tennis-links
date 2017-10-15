@@ -6,5 +6,9 @@ namespace TennisLinks.Services.Interfaces
     public interface IUserService
     {
         IQueryable<User> GetAll();
+
+        User GetById(string Id);
+
+        int Update(User user);
     }
 }
