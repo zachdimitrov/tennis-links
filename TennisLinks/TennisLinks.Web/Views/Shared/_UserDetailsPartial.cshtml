@@ -1,0 +1,43 @@
+﻿@using TennisLinks.Web.Models.Home
+@model UserDetailedViewModel
+
+<div class="player-details-wrapper col-xs-6 col-sm-4 col-md-3">
+    <div class="player-details">
+        <img src="~/Content/Images/tennis-default.png" alt="Player" />
+        <h2>@Model.UserName</h2>
+        <span class="hidden glyphicon glyphicon-star" aria-hidden="true"></span>
+        <table class="table">
+            <tr>
+                <th scope="row">gender</th>
+                <td>@Model.Gender</td>
+            </tr>
+            <tr>
+                <th scope="row">age</th>
+                <td>@Model.Age</td>
+            </tr>
+            <tr>
+                <th scope="row">from</th>
+                <td>@Model.City</td>
+            </tr>
+            <tr>
+                <th scope="row">skills</th>
+                <td>@Model.Skill</td>
+            </tr>
+            <tr>
+                <th scope="row">clubs</th>
+                <td>@string.Join(", ", Model.Clubs)</td>
+            </tr>
+            <tr>
+                <th scope="row">time</th>
+                <td>@string.Join(", ", Model.PlayTimes)</td>
+            </tr>
+            <tr>
+                <th scope="row">info</th>
+                <td>@Model.Info</td>
+            </tr>
+        </table>
+        <a href="#" class="btn btn-sm btn-warning">MESSAGE</a>
+        <a href="#" class="btn btn-sm btn-success">FAVOURITE</a>
+        <a href="#" class="hidden btn btn-sm btn-default">UNFAVOUR</a>
+    </div>
+</div>

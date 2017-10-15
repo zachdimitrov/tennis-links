@@ -6,7 +6,7 @@ namespace TennisLinks.Data.Migrations
     using Models;
     using Models.Enumerations;
     using System;
-    using System.Data.Entity;
+    using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
@@ -15,6 +15,7 @@ namespace TennisLinks.Data.Migrations
         public Configuration()
         {
             this.AutomaticMigrationsEnabled = false;
+            this.AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(MsSqlDbContext context)
@@ -28,6 +29,8 @@ namespace TennisLinks.Data.Migrations
             this.CreatePlayTimes(context);
             this.SampleCity(context, CityName);
             this.SampleClub(context, ClubName);
+            this.SampleDetails(context);
+            this.SampleMessage(context);
             this.SeedAdmin(
                 context, 
                 AdministratorUserName,
@@ -82,6 +85,47 @@ namespace TennisLinks.Data.Migrations
             }
         }
 
+        private void SampleDetails(IMsSqlDbContext context)
+        {
+            if (!context.Details.Any())
+            {
+                var details = new Details()
+                {
+                    City = context.Cities.First(),
+                    Age = 35,
+                    Gender = Gender.Male,
+                    Skill = 2.5,
+                    Info = "Tennis Links app administrator. If you have any troubles or requests do not hesitate to contact me!",
+                    CreatedOn = DateTime.Now
+                };
+
+                details.Clubs.Add(context.Clubs.First());
+                details.PlayTimes.Add(context.PlayTimes.First(p => p.Time == TimeOfDay.morning));
+                details.PlayTimes.Add(context.PlayTimes.First(p => p.Time == TimeOfDay.evening));
+
+                context.Details.Add(details);
+                context.SaveChanges();
+            }
+        }
+
+        private void SampleMessage(IMsSqlDbContext context)
+        {
+            if(!context.Messages.Any())
+            {
+                var message = new Message()
+                {
+                    Title = "Test message",
+                    Content = "This is just a test!",
+                    Author = "Gosho",
+                    Recipient = "Admin",
+                    CreatedOn = DateTime.Now
+                };
+
+                context.Messages.Add(message);
+                context.SaveChanges();
+            }
+        }
+
         private void SeedAdmin(MsSqlDbContext context, 
             string AdministratorUserName, 
             string AdministratorEmail,
@@ -101,22 +145,19 @@ namespace TennisLinks.Data.Migrations
 
                 var userStore = new UserStore<User>(context);
                 var userManager = new UserManager<User>(userStore);
+
+                var messages = new HashSet<Message>();
+                messages.Add(context.Messages.First());
+                
                 var user = new User
                 {
                     UserName = AdministratorUserName,
                     Email = AdministratorEmail,
                     EmailConfirmed = true,
-                    City = context.Cities.First(),
-                    Age = 35,
-                    Gender = Gender.Male,
-                    Skill = 2.5,
-                    Info = "Tennis Links app administrator. If you have any troubles or requests do not hesitate to contact me!",
+                    Details = context.Details.First(),
+                    Messages = messages,
                     CreatedOn = DateTime.Now
                 };
-
-                user.Clubs.Add(context.Clubs.First());
-                user.PlayTimes.Add(context.PlayTimes.First(p => p.Time == TimeOfDay.morning));
-                user.PlayTimes.Add(context.PlayTimes.First(p => p.Time == TimeOfDay.evening));
 
                 userManager.Create(user, AdministratorPassword);
                 userManager.AddToRole(user.Id, adminRole.Name);

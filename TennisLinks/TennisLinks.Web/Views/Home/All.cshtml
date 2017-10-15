@@ -1,0 +1,16 @@
+﻿@using TennisLinks.Web.Models.Home
+@model IEnumerable<UserSearchResultViewModel>
+
+@{
+    ViewBag.Title = "all players";
+}
+<h2>@ViewBag.Title</h2>
+
+<p class="text-success">Browse all players in database</p>
+<hr />
+<div class="player-box row">
+    @foreach (var user in Model)
+    {
+        @Html.Partial("_UserDetailsPartial", user);
+    }
+</div>
