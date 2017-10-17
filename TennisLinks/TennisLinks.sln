@@ -2,10 +2,18 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisLinks.Web", "TennisLinks.Web\TennisLinks.Web.csproj", "{8DE5DBED-955E-44C1-8766-81D07650A2CB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisLinks.Web.Tests", "TennisLinks.Web.Tests\TennisLinks.Web.Tests.csproj", "{360423F8-7334-4DE9-BC47-61E49253DE63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisLinks.Data", "TennisLinks.Data\TennisLinks.Data.csproj", "{1002FBB5-23A0-49B6-815E-25CEB23972B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisLinks.Models", "TennisLinks.Models\TennisLinks.Models.csproj", "{0770A349-86ED-46C2-BF28-81D961DBBAC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TennisLinks.Services", "TennisLinks.Services\TennisLinks.Services.csproj", "{F3C644B9-7C70-4531-BAA6-6174F5A1054E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,18 @@ Global
 		{360423F8-7334-4DE9-BC47-61E49253DE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{360423F8-7334-4DE9-BC47-61E49253DE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{360423F8-7334-4DE9-BC47-61E49253DE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1002FBB5-23A0-49B6-815E-25CEB23972B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1002FBB5-23A0-49B6-815E-25CEB23972B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1002FBB5-23A0-49B6-815E-25CEB23972B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1002FBB5-23A0-49B6-815E-25CEB23972B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0770A349-86ED-46C2-BF28-81D961DBBAC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0770A349-86ED-46C2-BF28-81D961DBBAC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0770A349-86ED-46C2-BF28-81D961DBBAC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0770A349-86ED-46C2-BF28-81D961DBBAC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3C644B9-7C70-4531-BAA6-6174F5A1054E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3C644B9-7C70-4531-BAA6-6174F5A1054E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3C644B9-7C70-4531-BAA6-6174F5A1054E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3C644B9-7C70-4531-BAA6-6174F5A1054E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

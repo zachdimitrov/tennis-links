@@ -1,0 +1,29 @@
+﻿@using TennisLinks.Web.Models.Messages
+
+@model MessageViewModel
+
+<div class="message-details-wrapper col-sm-6">
+    <div class="message-details">
+        <img src="~/Content/Images/tennis-default.png" alt="Player" />
+        <h2>to @Model.Recipient</h2>
+
+        <table class="table">
+            <tr>
+                <th scope="row">Date sent:</th>
+                <td>@Model.CreatedOn</td>
+            </tr>
+            <tr>
+                @if (@Model.Title.Length > 0)
+                {
+                    <th scope="row">@Model.Title</th>
+                }
+                else
+                {
+                    <th scope="row">No title!</th>
+                }
+                <td>@Model.Content</td>
+            </tr>
+        </table>
+        <a href="/messages/write?recipient=@Model.Recipient" id="msg-@Model.Recipient" class="btn btn-sm btn-warning">ANOTHER MESSAGE</a>
+    </div>
+</div>

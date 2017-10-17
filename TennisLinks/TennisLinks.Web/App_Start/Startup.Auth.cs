@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using TennisLinks.Web.Models;
+using TennisLinks.Models;
+using TennisLinks.Data;
 
 namespace TennisLinks.Web
 {
@@ -15,7 +17,7 @@ namespace TennisLinks.Web
         public void ConfigureAuth(IAppBuilder app)
         {
             // Configure the db context, user manager and signin manager to use a single instance per request
-            app.CreatePerOwinContext(ApplicationDbContext.Create);
+            app.CreatePerOwinContext(MsSqlDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
@@ -30,7 +32,7 @@ namespace TennisLinks.Web
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, User>(
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
@@ -55,13 +57,13 @@ namespace TennisLinks.Web
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "117037575654414",
-               appSecret: "85ca8200a2ee1e84c5f96c1bdc4bbff3");
+               appId: "1939307389661334",
+               appSecret: "67be7ec9434db0980005cdfc0a6acba0");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = "583239858272-bp0ft2lc5qb74v8g3id7girh0aaf9hqh.apps.googleusercontent.com",
-                ClientSecret = "Bsm4aLOTREdN3arpxgeoJ0UY"
+                ClientSecret = "tRRrwJq0dAX-EmREfjY7ZzIy"
             });
         }
     }

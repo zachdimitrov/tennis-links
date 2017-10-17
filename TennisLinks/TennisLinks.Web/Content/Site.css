@@ -1,24 +1,313 @@
 ﻿body {
+    font-family: 'Slabo 27px', serif;
+    font-size: 1.4rem;
     padding-top: 50px;
     padding-bottom: 20px;
+    background: url("Images/bak-main.png") fixed top repeat-x;
+    background-color: #000;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    background-color: #eee;
+    box-shadow: 0 0 115px 6px black;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt {
+.dl-horizontal dt, 
+.dl-horizontal dd {
     white-space: normal;
+    margin: 10px;
+}
+
+.dl-horizontal dd a {
+    min-width: 200px;
+    border: 1px solid grey;
+    box-shadow: 2px 2px 6px #808080;
+    color: black;
+}
+
+.dl-horizontal dd a:hover {
+    color: black;
+
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
+a,
 input,
+button,
 select,
 textarea {
     max-width: 280px;
+    border-radius: 0 !important;
+}
+
+a {
+    color:#31ac00;
+    /*text-shadow: 1px 1px 1px #c6ff00;*/
+}
+
+.table > tbody > tr > td,
+.table > tbody > tr > th {
+    padding: 4px 2px 2px 4px;
+    border: none;
+}
+
+footer a:hover, 
+footer a:focus, 
+footer a:active {
+    color: #c6ff00;
+}
+
+footer {
+    padding: 0 15px;
+    margin: 0 -15px;
+    background: #555;
+}
+
+footer p {
+    margin: 15px 0 0 0;
+line-height: 45px;
+color: white;
+}
+
+footer p a {
+    color: #deffb4;
+}
+
+hr {
+    height: 1px;
+    margin: 15px -15px;
+    background-color: white;
+    box-shadow: 0 1px 1px #999;
+}
+
+.btn-primary {
+    border: 1px solid grey;
+    background-color: #deffb4 ;
+    color: #222;
+    box-shadow: 2px 2px 6px #808080;
+}
+
+.btn-primary:hover {
+    border: 1px solid grey;
+    background-color: #c6ff00;
+    color: #000;
+}
+
+.btn-primary:active:focus {
+    border: 1px solid grey;
+    text-shadow: none;
+    color: #000;
+    background-color: #31ac00;
+    box-shadow: -2px -2px -6px #808080;
+}
+
+.navbar>.container {
+    padding-right: 40px!important;
+}
+
+.navbar-inverse,
+.navbar-inverse .navbar-toggle,
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:active:focus
+ {
+    background-color: #00695c;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #deffb4;
+    text-shadow: 1px 1px 2px #222;
+}
+
+.navbar-inverse .navbar-nav > li:hover {
+    background-color: #002c1c;
+}
+
+
+.navbar-inverse .navbar-nav > li > a:hover {
+    color: #c6ff00;
+}
+
+.navbar-inverse .navbar-brand {
+    font-family:'Indie Flower', cursive;
+    font-size: 3rem;
+    color: white;
+    text-shadow: 1px 1px 2px #222;
+}
+
+.navbar-inverse .navbar-brand:hover {
+    color: #c6ff00;
+}
+
+.navbar-inverse {
+   border-bottom: 1px solid white;
+}
+
+.navbar-header img {
+    float: left;
+    height: 3rem;
+    margin: 10px 10px 0 10px;
+}
+
+.navbar-header button {
+    border: none;
+    background: none;
+}
+
+h1, h2 {
+    font-family:'Indie Flower', cursive;
+    color:#000;
+    text-shadow: 1px 1px 1px #c6ff00;
+}
+
+h3, h4 {
+    font-family:'Indie Flower', cursive;
+    color:#31ac00;
+    text-shadow: 1px 1px 1px #c6ff00;
+}
+
+.player-details .glyphicon-star {
+    line-height: 0;
+    font-size: 3rem;
+    float: right;
+    right: 15px;
+    top: -30px;
+    color: #c6ff00;
+    text-shadow: 2px 2px 2px #333;
+}
+
+@media(max-width: 420px) {
+    .player-details .glyphicon-star {
+        top: 10px;
+    }
+}
+
+
+/* custom selector styles */
+
+.front-box {
+    padding: 0 20px;
+}
+
+.player-box {
+    padding: 10px;
+
+}
+
+.player-details-wrapper {
+    padding: 5px !important;
+}
+
+.player-details {
+    padding: 0 5px 5px;
+    background: #fff;
+    border: 1px solid grey;
+    box-shadow: 3px 3px 8px #555;
+}
+
+.player-details img {
+    width: 5rem;
+    float: left;
+    margin: 10px 10px 0 0;
+}
+
+.player-details .btn {
+    border: 1px solid grey;
+}
+
+.user-details-table {
+    line-height: 4rem;
+    margin-bottom: 30px;
+}
+
+.user-details-table th {
+    padding: 0 30px;
+}
+
+.user-details-table td {
+    padding: 0 30px;
+}
+
+/* Messages container */
+
+.message-box {
+    padding: 10px 20px;
+
+}
+
+.message-details-wrapper {
+    padding: 5px !important;
+}
+
+.message-details {
+    padding: 0 15px 10px;
+    background: #fff;
+    border: 1px solid grey;
+    box-shadow: 3px 3px 8px #555;
+}
+
+.message-details img {
+    width: 5rem;
+    float: left;
+    margin: 10px 10px 0 0;
+}
+
+.message-details .btn {
+    border: 1px solid grey;
+}
+
+/* handle errors on screen */
+
+#error-message {
+    color: indianred;
+}
+
+/* other options */
+
+.orange-button {
+    margin-left: 20px;
+    color: black;
+    background-color: #ffbb4f;
+    border: 1px solid grey;
+    box-shadow: 2px 2px 6px #808080;
+}
+
+.orange-button:hover,
+.orange-button:active:focus {
+    background-color: orange;
+    color: black;
+    border: 1px solid grey;
+}
+
+.images-box {
+    padding: 0 60px;
+    padding-bottom: 30px;
+}
+
+@media(max-width:760px) {
+    .images-box {
+    padding: 0 10px;
+    padding-bottom: 10px;
+}
+
+}
+
+.home-image {
+    background: white;
+    margin-bottom:30px;
+}
+
+.images-box-wrapper img {
+    max-width: 100%;
+    padding: 8px;
+    box-shadow: 2px 2px 6px #808080;
+}
+
+.jumbotron {
+    margin-bottom: 0!important;
 }

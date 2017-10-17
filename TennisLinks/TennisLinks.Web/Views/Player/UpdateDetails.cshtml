@@ -1,0 +1,86 @@
+﻿@using TennisLinks.Web.Models.Player
+@model UpdateDetailsBindModel
+
+@{
+    ViewBag.Title = ViewBag.UserName + " - update your user details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Update your user details</h4>
+<h4>Fill the form and send your new info</h4>
+
+<hr />
+
+@using (Html.BeginForm("UpdateDetails", "Player", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(x => x.Age, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(x => x.Age, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control mr-4",
+               @placeholder = "age"
+           }
+       })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Gender, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.Gender, new SelectList(new List<string>() { "Female", "Male" }), "gender", new { @class = "form-control mr-4" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.SkillLevel, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.SkillLevel, new SelectList(TennisLinks.Models.Constants.Numeric.Skill), "level", new { @class = "form-control mr-4" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.City, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(x => x.City, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control mr-4",
+               @placeholder = "name"
+           }
+       })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Club, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.Club, new SelectList(Model.AllClubs), "club name", new { @class = "form-control mr-4" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.PlayTime, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.PlayTime, new SelectList(Model.AllPlayTimes), "time available", new { @class = "form-control mr-4" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Info, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(x => x.Info, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control mr-4",
+               @placeholder = "write something about you"
+           }
+       })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" value="SEND DETAILS" class="btn btn-primary" />
+        </div>
+    </div>
+}

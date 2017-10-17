@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Areas/Administration/Views/Shared/_Layout.cshtml";
+}
+
+@using GridMvc.Html
+@using TennisLinks.Web.Areas.Administration.Models
+
+@model IEnumerable<ManageUserDetailsViewModel>
+
+@{
+    ViewBag.Title = "User details administration";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Review all user details</h4>
+
+<hr />
+
+<div class="text-left">
+    @Html.Grid(Model).AutoGenerateColumns().Sortable().Filterable().WithPaging(4)
+</div>

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Messages";
+}
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>View your personal messages</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Your inbox:</dt>
+        <dd>
+            @Html.ActionLink("View received messages", "Received", "Messages", null, new { @class = "btn btn-warning" })
+        </dd>
+        <dt>Your outbox:</dt>
+        <dd>
+            @Html.ActionLink("View sent messages", "Sent", "Messages", null, new { @class = "btn btn-success" })
+        </dd>
+    </dl>
+</div>
