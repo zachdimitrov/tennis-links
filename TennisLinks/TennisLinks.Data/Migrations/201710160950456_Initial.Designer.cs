@@ -13,7 +13,7 @@ namespace TennisLinks.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201710151406283_Initial"; }
+            get { return "201710160950456_Initial"; }
         }
         
         string IMigrationMetadata.Source

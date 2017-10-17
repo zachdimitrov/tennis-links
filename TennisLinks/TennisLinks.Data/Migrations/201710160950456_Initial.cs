@@ -28,16 +28,16 @@ namespace TennisLinks.Data.Migrations
                         Id = c.Guid(nullable: false),
                         Name = c.String(nullable: false, maxLength: 50),
                         SurfaceType = c.Int(nullable: false),
+                        City_Id = c.Guid(),
                         IsDeleted = c.Boolean(nullable: false),
                         CreatedOn = c.DateTime(),
                         DeletedOn = c.DateTime(),
                         ModifiedOn = c.DateTime(),
-                        City_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cities", t => t.City_Id)
-                .Index(t => t.IsDeleted)
-                .Index(t => t.City_Id);
+                .Index(t => t.City_Id)
+                .Index(t => t.IsDeleted);
             
             CreateTable(
                 "dbo.Details",
@@ -48,16 +48,22 @@ namespace TennisLinks.Data.Migrations
                         Gender = c.Int(),
                         Info = c.String(maxLength: 250),
                         SkillLevel = c.Double(name: "Skill Level", nullable: false),
+                        City_Id = c.Guid(),
+                        PlayTime_Id = c.Guid(),
+                        Club_Id = c.Guid(),
                         IsDeleted = c.Boolean(nullable: false),
                         CreatedOn = c.DateTime(),
                         DeletedOn = c.DateTime(),
                         ModifiedOn = c.DateTime(),
-                        City_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cities", t => t.City_Id)
-                .Index(t => t.IsDeleted)
-                .Index(t => t.City_Id);
+                .ForeignKey("dbo.Clubs", t => t.Club_Id)
+                .ForeignKey("dbo.PlayTimes", t => t.PlayTime_Id)
+                .Index(t => t.City_Id)
+                .Index(t => t.PlayTime_Id)
+                .Index(t => t.Club_Id)
+                .Index(t => t.IsDeleted);
             
             CreateTable(
                 "dbo.PlayTimes",
@@ -125,6 +131,7 @@ namespace TennisLinks.Data.Migrations
                         CreatedOn = c.DateTime(),
                         DeletedOn = c.DateTime(),
                         ModifiedOn = c.DateTime(),
+                        Details_Id = c.Guid(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -136,13 +143,12 @@ namespace TennisLinks.Data.Migrations
                         LockoutEnabled = c.Boolean(nullable: false),
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
-                        Details_Id = c.Guid(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Details", t => t.Details_Id)
+                .ForeignKey("dbo.Details", t => t.Details_Id, cascadeDelete: true)
                 .Index(t => t.IsDeleted)
-                .Index(t => t.UserName, unique: true, name: "UserNameIndex")
-                .Index(t => t.Details_Id);
+                .Index(t => t.Details_Id)
+                .Index(t => t.UserName, unique: true, name: "UserNameIndex");
             
             CreateTable(
                 "dbo.AspNetUserClaims",
@@ -169,32 +175,6 @@ namespace TennisLinks.Data.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
-            CreateTable(
-                "dbo.DetailsClubs",
-                c => new
-                    {
-                        Details_Id = c.Guid(nullable: false),
-                        Club_Id = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Details_Id, t.Club_Id })
-                .ForeignKey("dbo.Details", t => t.Details_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Clubs", t => t.Club_Id, cascadeDelete: true)
-                .Index(t => t.Details_Id)
-                .Index(t => t.Club_Id);
-            
-            CreateTable(
-                "dbo.PlayTimeDetails",
-                c => new
-                    {
-                        PlayTime_Id = c.Guid(nullable: false),
-                        Details_Id = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.PlayTime_Id, t.Details_Id })
-                .ForeignKey("dbo.PlayTimes", t => t.PlayTime_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Details", t => t.Details_Id, cascadeDelete: true)
-                .Index(t => t.PlayTime_Id)
-                .Index(t => t.Details_Id);
-            
         }
         
         public override void Down()
@@ -205,20 +185,14 @@ namespace TennisLinks.Data.Migrations
             DropForeignKey("dbo.AspNetUsers", "Details_Id", "dbo.Details");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.PlayTimeDetails", "Details_Id", "dbo.Details");
-            DropForeignKey("dbo.PlayTimeDetails", "PlayTime_Id", "dbo.PlayTimes");
-            DropForeignKey("dbo.DetailsClubs", "Club_Id", "dbo.Clubs");
-            DropForeignKey("dbo.DetailsClubs", "Details_Id", "dbo.Details");
+            DropForeignKey("dbo.Details", "PlayTime_Id", "dbo.PlayTimes");
+            DropForeignKey("dbo.Details", "Club_Id", "dbo.Clubs");
             DropForeignKey("dbo.Details", "City_Id", "dbo.Cities");
             DropForeignKey("dbo.Clubs", "City_Id", "dbo.Cities");
-            DropIndex("dbo.PlayTimeDetails", new[] { "Details_Id" });
-            DropIndex("dbo.PlayTimeDetails", new[] { "PlayTime_Id" });
-            DropIndex("dbo.DetailsClubs", new[] { "Club_Id" });
-            DropIndex("dbo.DetailsClubs", new[] { "Details_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
-            DropIndex("dbo.AspNetUsers", new[] { "Details_Id" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.AspNetUsers", new[] { "Details_Id" });
             DropIndex("dbo.AspNetUsers", new[] { "IsDeleted" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
@@ -226,13 +200,13 @@ namespace TennisLinks.Data.Migrations
             DropIndex("dbo.Messages", new[] { "User_Id" });
             DropIndex("dbo.Messages", new[] { "IsDeleted" });
             DropIndex("dbo.PlayTimes", new[] { "IsDeleted" });
-            DropIndex("dbo.Details", new[] { "City_Id" });
             DropIndex("dbo.Details", new[] { "IsDeleted" });
-            DropIndex("dbo.Clubs", new[] { "City_Id" });
+            DropIndex("dbo.Details", new[] { "Club_Id" });
+            DropIndex("dbo.Details", new[] { "PlayTime_Id" });
+            DropIndex("dbo.Details", new[] { "City_Id" });
             DropIndex("dbo.Clubs", new[] { "IsDeleted" });
+            DropIndex("dbo.Clubs", new[] { "City_Id" });
             DropIndex("dbo.Cities", new[] { "IsDeleted" });
-            DropTable("dbo.PlayTimeDetails");
-            DropTable("dbo.DetailsClubs");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
