@@ -1,5 +1,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/zachdimitrov/tennis-links/badge.svg?branch=master)](https://coveralls.io/github/zachdimitrov/tennis-links?branch=master)
 
+[![Build status](https://ci.appveyor.com/api/projects/status/igtexou4ht7mmncc?svg=true)](https://ci.appveyor.com/project/zachdimitrov/tennis-links)
+
 # tennis-links
 
 ## Telerik Academy 2016-2017
