@@ -1,0 +1,68 @@
+﻿@using TennisLinks.Web.Models.Messages
+@model MessageViewModel
+
+@{
+    ViewBag.Title = "Send a messsage";
+}
+
+<h2>@ViewBag.Title</h2>
+@{ var recipient = Model.Recipient; }
+
+<h4>Send new message to <strong id="recipient-name">@recipient</strong></h4>
+<h5 class="hidden" id="error-message"></h5>
+
+<hr />
+
+@using (Html.BeginForm("Write", "Messages", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(x => x.Recipient, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(x => x.Recipient, new
+       {
+           htmlAttributes = new
+           {
+               @class = "message-to form-control",
+               @placeholder = "recipient",
+               @value = recipient
+           }
+       })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Title, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(x => x.Title, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control",
+               @placeholder = "title"
+           }
+       })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Content, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.EditorFor(x => x.Content, new
+       {
+           htmlAttributes = new
+           {
+               @class = "form-control",
+               @placeholder = "compose your message"
+           }
+       })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" value="SEND" class="send-button btn btn-primary" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/local")
+}
