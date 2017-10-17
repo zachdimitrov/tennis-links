@@ -1,0 +1,18 @@
+version: 1.0.{build}
+
+install:
+    - nuget restore
+    
+build:
+  project: ./TennisLinks/TennisLinks.sln
+  verbosity: minimal
+environment:
+    COVERALLS_REPO_TOKEN:  
+       secure: HUwNaoWeN3G944iOY3bJxpXXe0w1MfDpNa0iGiHVcTjuDo+/ch/aolgtpSBp+QF/
+ 
+after_test: 
+# generate report for NUnit testing framework:
+
+    - cmd: TennisLinks\packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -filter:"+[*]*" -target:"TennisLinks\packages\NUnit.ConsoleRunner.3.6.1\tools\nunit3-console.exe" -targetargs:"/domain:single TennisLinks\TennisLinks.Web.Tests\bin\Debug\TennisLinks.Web.Tests.dll" -output:cover.xml
+
+    - cmd: packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover coverage.xml -r %COVERALLS_REPO_TOKEN%
