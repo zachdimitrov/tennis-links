@@ -30,6 +30,7 @@ namespace TennisLinks.Data.Migrations
             this.SampleCity(context, CityName);
             this.SampleClub(context, ClubName);
             this.SampleDetails(context);
+            this.SampleFavorites(context);
             this.SampleMessage(context);
             this.SeedAdmin(
                 context, 
@@ -76,7 +77,7 @@ namespace TennisLinks.Data.Migrations
                 {
                     Name = ClubName,
                     SurfaceType = Surface.Clay,
-                    City = context.Cities.First(),
+                    City_Id = context.Cities.First().Id,
                     CreatedOn = DateTime.Now
                 };
 
@@ -91,7 +92,9 @@ namespace TennisLinks.Data.Migrations
             {
                 var details = new Details()
                 {
-                    City = context.Cities.First(),
+                    City_Id = context.Cities.First().Id,
+                    Club_Id = context.Clubs.First().Id,
+                    PlayTime_Id = context.PlayTimes.First().Id,
                     Age = 35,
                     Gender = Gender.Male,
                     Skill = 2.5,
@@ -99,13 +102,22 @@ namespace TennisLinks.Data.Migrations
                     CreatedOn = DateTime.Now
                 };
 
-                details.Clubs.Add(context.Clubs.First());
-                details.PlayTimes.Add(context.PlayTimes.First(p => p.Time == TimeOfDay.morning));
-                details.PlayTimes.Add(context.PlayTimes.First(p => p.Time == TimeOfDay.evening));
-
                 context.Details.Add(details);
                 context.SaveChanges();
             }
+        }
+
+        private void SampleFavorites(MsSqlDbContext context)
+        {
+            var favorite = new Favorite()
+            {
+                UserName = "gosho",
+                Details_Id = context.Details.First().Id,
+                CreatedOn = DateTime.Now
+            };
+
+            context.Favorites.Add(favorite);
+
         }
 
         private void SampleMessage(IMsSqlDbContext context)
@@ -155,7 +167,6 @@ namespace TennisLinks.Data.Migrations
                     Email = AdministratorEmail,
                     EmailConfirmed = true,
                     Details = context.Details.First(),
-                    Messages = messages,
                     CreatedOn = DateTime.Now
                 };
 

@@ -1,8 +1,8 @@
 ﻿@using TennisLinks.Web.Models.Player
-@model DetailsViewModel
+@model UpdateDetailsBindModel
 
 @{
-    ViewBag.Title = Model.UserName + " - update your user details";
+    ViewBag.Title = ViewBag.UserName + " - update your user details";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -14,7 +14,7 @@
 
 @using (Html.BeginForm("UpdateDetails", "Player", FormMethod.Post, new { @class = "form-horizontal" }))
 {
-
+    @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.LabelFor(x => x.Age, new { @class = "control-label col-sm-2" })
         <div class="col-sm-10">
@@ -51,6 +51,18 @@
                @placeholder = "name"
            }
        })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Club, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.Club, new SelectList(Model.AllClubs), "club name", new { @class = "form-control mr-4" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.PlayTime, new { @class = "control-label col-sm-2" })
+        <div class="col-sm-10">
+            @Html.DropDownListFor(x => x.PlayTime, new SelectList(Model.AllPlayTimes), "time available", new { @class = "form-control mr-4" })
         </div>
     </div>
     <div class="form-group">

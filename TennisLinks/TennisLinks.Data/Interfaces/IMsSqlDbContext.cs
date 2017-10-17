@@ -12,5 +12,6 @@ namespace TennisLinks.Data.Interfaces
         IDbSet<Club> Clubs { get; set; }
         IDbSet<Message> Messages { get; set; }
         IDbSet<PlayTime> PlayTimes { get; set; }
+        IDbSet<Favorite> Favorites { get; set; }
     }
 }

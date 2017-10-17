@@ -8,7 +8,5 @@ namespace TennisLinks.Services.Interfaces
         IQueryable<User> GetAll();
 
         User GetById(string Id);
-
-        int Update(User user);
     }
 }

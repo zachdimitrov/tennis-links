@@ -32,6 +32,9 @@ namespace TennisLinks.Models
         [DataType(DataType.DateTime)]
         public DateTime? ModifiedOn { get; set; }
 
+        public Guid Details_Id { get; set; }
+
+        [ForeignKey("Details_Id")]
         public Details Details { get; set; }
 
         public virtual ICollection<Message> Messages
@@ -45,6 +48,8 @@ namespace TennisLinks.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("DetailsId", this.Details_Id.ToString()));
+
             return userIdentity;
         }
     }

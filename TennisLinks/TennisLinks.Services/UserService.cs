@@ -23,13 +23,9 @@ namespace TennisLinks.Services
 
         public User GetById(string Id)
         {
-            return this.userRepo.All.SingleOrDefault(x => x.Id == Id);
-        }
-
-        public int Update(User user)
-        {
-            this.userRepo.Update(user);
-            return this.context.Commit();
+            return this.userRepo.All
+                .Where(x => x.Id == Id)
+                .First();
         }
     }
 }

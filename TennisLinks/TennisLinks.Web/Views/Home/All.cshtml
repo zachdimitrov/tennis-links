@@ -6,7 +6,10 @@
 }
 <h2>@ViewBag.Title</h2>
 
-<p class="text-success">Browse all players in database</p>
+<h4>Browse all players in database</h4>
+
+<h5 class="hidden" id="error-message"></h5>
+
 <hr />
 <div class="player-box row">
     @foreach (var user in Model)
@@ -14,3 +17,7 @@
         @Html.Partial("_UserDetailsPartial", user);
     }
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/local")
+}

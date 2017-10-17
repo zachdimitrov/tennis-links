@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using TennisLinks.Models.Abstracts;
 using TennisLinks.Models.Enumerations;
 
@@ -20,6 +22,9 @@ namespace TennisLinks.Models
 
         public Surface SurfaceType { get; set; }
 
+        public Guid? City_Id { get; set; }
+
+        [ForeignKey("City_Id")]
         public virtual City City { get; set; }
 
         public virtual ICollection<Details> UserDetails

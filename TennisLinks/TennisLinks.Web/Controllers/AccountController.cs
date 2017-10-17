@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TennisLinks.Web.Models.Account;
 using TennisLinks.Models;
+using System.Collections.Generic;
 
 namespace TennisLinks.Web.Controllers
 {
@@ -164,10 +165,10 @@ namespace TennisLinks.Web.Controllers
                         Gender = null,
                         City = null,
                         Skill = 1.0,
-                        Clubs = null, 
-                        PlayTimes = null,
-                        Favorites = null,
-                        Info = "No info for this user."
+                        Club = null, 
+                        PlayTime = null,
+                        Info = "No info for this user.",
+                        CreatedOn = DateTime.Now
                     }
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);

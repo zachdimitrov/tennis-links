@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using TennisLinks.Models;
 using TennisLinks.Web.Infrastructure;
 
@@ -23,11 +22,11 @@ namespace TennisLinks.Web.Models.Home
 
         public double Skill { get; set; }
 
-        public ICollection<PlayTimeBindModel> PlayTimes { get; set; }
+        public string PlayTime { get; set; }
 
-        public ICollection<ClubBindModel> Clubs { get; set; }
+        public string Club { get; set; }
 
-        public ICollection<string> Favorites { get; set; }
+        public bool Favorite { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
@@ -36,8 +35,8 @@ namespace TennisLinks.Web.Models.Home
                 .ForMember(viewModel => viewModel.Gender, cfg => cfg.MapFrom(model => model.Details.Gender.ToString()))
                 .ForMember(viewModel => viewModel.Info, cfg => cfg.MapFrom(model => model.Details.Info))
                 .ForMember(viewModel => viewModel.Skill, cfg => cfg.MapFrom(model => model.Details.Skill))
-                .ForMember(viewModel => viewModel.PlayTimes, cfg => cfg.MapFrom(model => model.Details.PlayTimes))
-                .ForMember(viewModel => viewModel.Clubs, cfg => cfg.MapFrom(model => model.Details.Clubs))
+                .ForMember(viewModel => viewModel.PlayTime, cfg => cfg.MapFrom(model => model.Details.PlayTime.Time.ToString()))
+                .ForMember(viewModel => viewModel.Club, cfg => cfg.MapFrom(model => model.Details.Club.Name))
                 .ForMember(viewModel => viewModel.City, cfg => cfg.MapFrom(model => model.Details.City.Name));
         }
     }

@@ -10,15 +10,11 @@ namespace TennisLinks.Models
 {
     public class Details : DataModel
     {
-        private ICollection<PlayTime> playTimes;
-        private ICollection<Club> clubs;
-        private ICollection<string> favorites;
+        private IEnumerable<Favorite> favorites;
 
         public Details()
         {
-            this.playTimes = new HashSet<PlayTime>();
-            this.clubs = new HashSet<Club>();
-            this.favorites = new HashSet<string>();
+            this.favorites = new HashSet<Favorite>();
         }
 
         public int? Age { get; set; }
@@ -32,24 +28,21 @@ namespace TennisLinks.Models
         [SkillValidation]
         public double Skill { get; set; }
 
+        public Guid? City_Id { get; set; }
+
+        [ForeignKey("City_Id")]
         public virtual City City { get; set; }
 
-        public virtual ICollection<PlayTime> PlayTimes
-        {
-            get { return this.playTimes; }
-            set { this.playTimes = value; }
-        }
+        public Guid? PlayTime_Id { get; set; }
 
-        public virtual ICollection<Club> Clubs
-        {
-            get { return this.clubs; }
-            set { this.clubs = value; }
-        }
+        [ForeignKey("PlayTime_Id")]
+        public virtual PlayTime PlayTime { get; set; }
 
-        public virtual ICollection<string> Favorites
-        {
-            get { return this.favorites; }
-            set { this.favorites = value; }
-        }
+        public Guid? Club_Id { get; set; }
+
+        [ForeignKey("Club_Id")]
+        public virtual Club Club { get; set; }
+
+        public virtual IEnumerable<Favorite> Favorites { get; set; }
     }
 }

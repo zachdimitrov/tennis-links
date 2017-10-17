@@ -29,6 +29,8 @@ namespace TennisLinks.Data
 
         public virtual IDbSet<PlayTime> PlayTimes { get; set; }
 
+        public virtual IDbSet<Favorite> Favorites { get; set; }
+
         public new IDbSet<T> Set<T>() where T : class
         {
             return base.Set<T>();

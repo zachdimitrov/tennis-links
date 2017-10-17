@@ -26,5 +26,11 @@ namespace TennisLinks.Services
             this.clubsRepo.Add(club);
             return this.context.Commit();
         }
+
+        public int Update(Club club)
+        {
+            this.clubsRepo.Update(club);
+            return this.context.Commit();
+        }
     }
 }

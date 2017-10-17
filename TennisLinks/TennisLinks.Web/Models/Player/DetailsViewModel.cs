@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using TennisLinks.Models;
 using TennisLinks.Models.Attributes;
 using TennisLinks.Web.Infrastructure;
-using TennisLinks.Web.Models.Home;
 
 namespace TennisLinks.Web.Models.Player
 {
@@ -35,24 +35,17 @@ namespace TennisLinks.Web.Models.Player
 
         public string City { get; set; }
 
-        public IEnumerable<ClubBindModel> Clubs { get; set; }
+        public string Club { get; set; }
 
-        public IEnumerable<ClubBindModel> AllClubs { get; set; }
-
-        public IEnumerable<PlayTimeBindModel> PlayTimes { get; set; }
-
-        public IEnumerable<PlayTimeBindModel> AllPlayTimes { get; set; }
-
-        public IEnumerable<string> Favorites { get; set; }
+        public string PlayTime { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
             configuration.CreateMap<Details, DetailsViewModel>()
-                .ForMember(viewModel => viewModel.Gender, cfg => cfg.MapFrom(model => model.Gender != null?model.Gender.ToString():null))
-                .ForMember(viewModel => viewModel.City, cfg => cfg.MapFrom(model => model.City.Name));
-            //.ForMember(viewModel => viewModel.PlayTimes, cfg => cfg.MapFrom(model => model.PlayTimes))
-            //.ForMember(viewModel => viewModel.Clubs, cfg => cfg.MapFrom(model => model.Clubs))
-            //.ForMember(viewModel => viewModel.Favorites, cfg => cfg.MapFrom(model => model.Favorites));
+                .ForMember(viewModel => viewModel.Gender, cfg => cfg.MapFrom(model => model.Gender != null ? model.Gender.ToString() : null))
+                .ForMember(viewModel => viewModel.City, cfg => cfg.MapFrom(model => model.City.Name))
+                .ForMember(viewModel => viewModel.PlayTime, cfg => cfg.MapFrom(model => model.PlayTime.Time.ToString()))
+                .ForMember(viewModel => viewModel.Club, cfg => cfg.MapFrom(model => model.Club.Name));
         }
     }
 }

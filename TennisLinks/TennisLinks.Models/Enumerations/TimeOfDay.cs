@@ -6,6 +6,7 @@
         lunch = 2,
         afternoon = 3,
         evening = 4,
-        night = 5
+        night = 5,
+        all = 6
     }
 }

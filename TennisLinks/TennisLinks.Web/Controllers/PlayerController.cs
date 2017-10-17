@@ -10,6 +10,8 @@ using TennisLinks.Models.Enumerations;
 using TennisLinks.Services.Interfaces;
 using TennisLinks.Web.Models.Home;
 using TennisLinks.Web.Models.Player;
+using TennisLinks.Models.Extensions;
+using TennisLinks.Web.Infrastructure;
 
 namespace TennisLinks.Web.Controllers
 {
@@ -41,50 +43,44 @@ namespace TennisLinks.Web.Controllers
 
         //
         // GET: /Player/Details
+        [HttpGet]
         public ActionResult Details()
         {
+            var id = this.User.Identity.GetUserId();
+
             var user = this.userService
-                .GetById(this.User.Identity.GetUserId());
+                .GetAll()
+                .Where(u=>u.Id == id)
+                .MapTo<UserSearchResultViewModel>()
+                .First();
 
-            var details = user.Details;
-
-            var viewDetails = new DetailsViewModel()
-            {
-                Email = user.Email,
-                UserName = user.UserName
-            };
-
-            mapper.Map(details, viewDetails);
-
-            return View(viewDetails);
+            return View(user);
         }
 
         //
         // GET: /Player/UpdateDetails
+        [HttpGet]
         public ActionResult UpdateDetails()
         {
-            var user = this.userService
-                .GetById(this.User.Identity.GetUserId());
+            ViewBag.UserName = this.User.Identity.GetUserName();
 
-            var details = user.Details;
-            var allClubsFromDb = this.clubService.GetAll().ToList();
-            var allPlayTimesFromDb = this.playTimeService.GetAll().ToList();
+            var allClubs = this.clubService
+                .GetAll()
+                .Select(x=>x.Name)
+                .ToList();
 
-            var allClubs = new List<ClubBindModel>();
-            var allPlayTimes = new List<PlayTimeBindModel>();
+            var allPlayTimes = this.playTimeService
+                .GetAll()
+                .Select(x => x.Time.ToString())
+                .ToList();
 
-            mapper.Map(allClubsFromDb, allClubs);
-            mapper.Map(allPlayTimesFromDb, allPlayTimes);
-
-            var viewDetails = new DetailsViewModel()
+            var viewDetails = new UpdateDetailsBindModel()
             {
-                Email = user.Email,
-                UserName = user.UserName,
                 AllPlayTimes = allPlayTimes,
-                AllClubs = allClubs
+                AllClubs = allClubs,
+                Club = "",
+                PlayTime = ""
             };
-
-            mapper.Map(details, viewDetails);
 
             return View(viewDetails);
         }
@@ -95,53 +91,88 @@ namespace TennisLinks.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult UpdateDetails(UpdateDetailsBindModel model)
         {
-            if (!ModelState.IsValid)
+            var id = this.User.Identity.GetUserId();
+            var user = this.userService
+                .GetAll()
+                .Where(u => u.Id == id)
+                .First();
+
+            var detailsId = this.User.Identity.GetDetailsId();
+
+            var details = this.detailsService
+                .GetAll()
+                .Where(x => x.Id.ToString() == detailsId)
+                .First();
+
+            if (model.Club != null)
             {
-                return View(model);
+                    var club = this.clubService
+                        .GetAll()
+                        .Where(x => x.Name == model.Club)
+                        .First();
+
+                    if (club == null)
+                    {
+                        return this.ClubValidationFailure(model.Club);
+                    }
+
+                    details.Club_Id = club.Id;
             }
 
-            var details = new Details();
-            details.Clubs = new HashSet<Club>();
-            details.PlayTimes = new HashSet<PlayTime>();
-            details.Favorites = new HashSet<string>();
-
-            foreach (var c in model.Clubs)
+            if (model.PlayTime != null)
             {
-                var club = this.clubService.GetAll().SingleOrDefault(x => x.Name == c);
-                if (club == null)
+                    var time = this.playTimeService
+                        .GetAll()
+                        .Where(x => x.Time.ToString() == model.PlayTime)
+                        .First();
+
+                    details.PlayTime_Id = time.Id;
+            }
+
+            if (model.City != null && model.City.Length > 2)
+            {
+                var city = this.cityService
+                    .GetAll()
+                    .Where(x => x.Name == model.City)
+                    .FirstOrDefault();
+
+                if (city == null)
                 {
-                    return this.ClubValidationFailure(c);
+                    city = new City()
+                    {
+                        Name = model.City
+                    };
+
+                    this.cityService.Add(city);
                 }
-                details.Clubs.Add(club);
+
+                details.City_Id = city.Id;
             }
 
-            foreach (var p in model.PlayTimes)
+            if(model.Age > 0)
             {
-                var time = this.playTimeService.GetAll().SingleOrDefault(x => x.Time.ToString() == p);
-                details.PlayTimes.Add(time);
+                details.Age = model.Age;
             }
 
-            foreach (var u in model.Favorites)
+            if (model.Info != null)
             {
-                var user = this.userService.GetAll().SingleOrDefault(x => x.UserName == u).UserName;
-                details.Favorites.Add(user);
+                details.Info = model.Info;
             }
 
-            var city = this.cityService.GetAll().SingleOrDefault(x => x.Name == model.City);
-            if (city == null)
+
+            if (model.Gender != null)
             {
-                city = new City()
-                {
-                    Name = model.City
-                };
-
-                this.cityService.Add(city);
+                details.Gender = (Gender)Enum.Parse(typeof(Gender), model.Gender);
             }
 
-            details.City = this.cityService.GetAll().SingleOrDefault(x => x.Name == model.City);
-            details.Age = model.Age;
-            details.Gender = (Gender)Enum.Parse(typeof(Gender), model.Gender);
-            details.Skill = model.SkillLevel;
+            if (model.SkillLevel >= 1)
+            {
+                details.Skill = model.SkillLevel;
+            }
+            else
+            {
+                details.Skill = 1;
+            }
 
             var result = this.detailsService.Update(details);
 

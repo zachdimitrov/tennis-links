@@ -1,11 +1,16 @@
-﻿@using TennisLinks.Web.Models.Home
-@model UserDetailedViewModel
+﻿@using Microsoft.AspNet.Identity
+@using TennisLinks.Web.Models.Home
+
+@model UserSearchResultViewModel
 
 <div class="player-details-wrapper col-xs-6 col-sm-4 col-md-3">
     <div class="player-details">
         <img src="~/Content/Images/tennis-default.png" alt="Player" />
         <h2>@Model.UserName</h2>
-        <span class="hidden glyphicon glyphicon-star" aria-hidden="true"></span>
+        @if (Model.Favorite)
+        {
+            <span id="star-@Model.UserName" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        }
         <table class="table">
             <tr>
                 <th scope="row">gender</th>
@@ -24,20 +29,27 @@
                 <td>@Model.Skill</td>
             </tr>
             <tr>
-                <th scope="row">clubs</th>
-                <td>@string.Join(", ", Model.Clubs)</td>
+                <th scope="row">club</th>
+                <td>@Model.Club</td>
             </tr>
             <tr>
                 <th scope="row">time</th>
-                <td>@string.Join(", ", Model.PlayTimes)</td>
+                <td>@Model.PlayTime</td>
             </tr>
             <tr>
                 <th scope="row">info</th>
                 <td>@Model.Info</td>
             </tr>
         </table>
-        <a href="#" class="btn btn-sm btn-warning">MESSAGE</a>
-        <a href="#" class="btn btn-sm btn-success">FAVOURITE</a>
-        <a href="#" class="hidden btn btn-sm btn-default">UNFAVOUR</a>
+        <a href="/messages/write?recipient=@Model.UserName" current="@User.Identity.GetUserName()" id="msg-@Model.UserName" class="write-message btn btn-sm btn-warning">MESSAGE</a>
+
+        @if (!Model.Favorite)
+        {
+            <a href="/favorites/add?username=@Model.UserName" id="add-@Model.UserName" class="btn btn-sm btn-success">FAVOURITE</a>
+        }
+        else
+        {
+            <a href="/favorites/remove?username=@Model.UserName" id="rem-@Model.UserName" class="btn btn-sm btn-default">UNFAVOUR</a>
+        }
     </div>
 </div>

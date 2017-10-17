@@ -18,14 +18,18 @@ namespace TennisLinks.Web.Models.Player
         public string Info { get; set; }
 
         [SkillValidation]
+        [Display(Name = "Skill Level")]
         public double SkillLevel { get; set; }
 
         public string City { get; set; }
 
-        public IEnumerable<string> Clubs { get; set; }
+        public string Club { get; set; }
 
-        public IEnumerable<string> PlayTimes { get; set; }
+        public List<string> AllClubs { get; set; }
 
-        public IEnumerable<string> Favorites { get; set; }
+        [Display(Name = "Available to play")]
+        public string PlayTime { get; set; }
+
+        public List<string> AllPlayTimes { get; set; }
     }
 }
