@@ -8,23 +8,14 @@ using TennisLinks.Web.Controllers;
 
 namespace TennisLinks.Web.Tests.Controllers.HomeTests
 {
-    [SetUpFixture]
-    class IndexShould
+    public class IndexShould
     {
-        private Mock<IUserService> userServiceMock;
-        private Mock<IFavoriteService> favServiceMock;
-
-        [SetUp]
-        public void Initialize()
-        {
-            this.userServiceMock = new Mock<IUserService>();
-            this.favServiceMock = new Mock<IFavoriteService>();
-        }
-
         [Test]
         public void ReturnCorrect_Index_View()
         {
             // Arrange
+            var userServiceMock = new Mock<IUserService>();
+            var favServiceMock = new Mock<IFavoriteService>();
             var controllerUT = new HomeController(userServiceMock.Object, favServiceMock.Object);
 
             userServiceMock.Setup(u => u.GetAll()).Returns(It.IsAny<IQueryable<User>>());
@@ -40,6 +31,8 @@ namespace TennisLinks.Web.Tests.Controllers.HomeTests
         public void ReturnCorrect_About_View()
         {
             // Arrange
+            var userServiceMock = new Mock<IUserService>();
+            var favServiceMock = new Mock<IFavoriteService>();
             var controllerUT = new HomeController(userServiceMock.Object, favServiceMock.Object);
 
             userServiceMock.Setup(u => u.GetAll()).Returns(It.IsAny<IQueryable<User>>());
@@ -55,6 +48,8 @@ namespace TennisLinks.Web.Tests.Controllers.HomeTests
         public void ReturnCorrect_Contact_View()
         {
             // Arrange
+            var userServiceMock = new Mock<IUserService>();
+            var favServiceMock = new Mock<IFavoriteService>();
             var controllerUT = new HomeController(userServiceMock.Object, favServiceMock.Object);
 
             userServiceMock.Setup(u => u.GetAll()).Returns(It.IsAny<IQueryable<User>>());
