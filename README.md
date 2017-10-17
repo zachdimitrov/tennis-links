@@ -1,3 +1,5 @@
+[![Coverage Status](https://coveralls.io/repos/github/zachdimitrov/tennis-links/badge.svg?branch=master)](https://coveralls.io/github/zachdimitrov/tennis-links?branch=master)
+
 # tennis-links
 
 ## Telerik Academy 2016-2017
