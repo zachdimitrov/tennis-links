@@ -5,10 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 using TennisLinks.Models.Abstracts;
 using TennisLinks.Models.Attributes;
 using TennisLinks.Models.Enumerations;
+using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
 {
-    public class Details : DataModel
+    public class Details : DataModel, IDetails
     {
         private IEnumerable<Favorite> favorites;
 

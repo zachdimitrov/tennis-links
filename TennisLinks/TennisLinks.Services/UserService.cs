@@ -25,7 +25,7 @@ namespace TennisLinks.Services
         {
             return this.userRepo.All
                 .Where(x => x.Id == Id)
-                .First();
+                .FirstOrDefault();
         }
     }
 }

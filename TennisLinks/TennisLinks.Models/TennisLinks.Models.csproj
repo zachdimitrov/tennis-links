@@ -67,8 +67,14 @@
     <Compile Include="Enumerations\TimeOfDay.cs" />
     <Compile Include="Enumerations\Surface.cs" />
     <Compile Include="Favorite.cs" />
+    <Compile Include="Interfaces\IMessage.cs" />
+    <Compile Include="Interfaces\IFavorite.cs" />
+    <Compile Include="Interfaces\IDetails.cs" />
+    <Compile Include="Interfaces\IClub.cs" />
+    <Compile Include="Interfaces\ICity.cs" />
     <Compile Include="Interfaces\IAuditable.cs" />
     <Compile Include="Interfaces\IDeletable.cs" />
+    <Compile Include="Interfaces\IPlayTime.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="PlayTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

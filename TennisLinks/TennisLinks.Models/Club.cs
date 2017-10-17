@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using TennisLinks.Models.Abstracts;
 using TennisLinks.Models.Enumerations;
+using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
 {
-    public class Club : DataModel
+    public class Club : DataModel, IClub
     {
         private ICollection<Details> userDetails;
 

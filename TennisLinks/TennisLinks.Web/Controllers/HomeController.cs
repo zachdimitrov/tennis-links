@@ -23,7 +23,7 @@ namespace TennisLinks.Web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         // for ajax request
@@ -127,12 +127,12 @@ namespace TennisLinks.Web.Controllers
 
         public ActionResult About()
         {
-            return View();
+            return View("About");
         }
 
         public ActionResult Contact()
         {
-            return View();
+            return View("Contact");
         }
     }
 }

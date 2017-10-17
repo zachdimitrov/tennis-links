@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
+using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TennisLinks.Models.Extensions;
 using TennisLinks.Services.Interfaces;
@@ -13,30 +12,33 @@ namespace TennisLinks.Web.Areas.Administration.Controllers
     public class ManageUserDetailsController : Controller
     {
         private readonly IUserService userService;
-        private readonly IFavoriteService favorService;
+        private readonly IMapper mapper;
+        // private readonly IFavoriteService favorService;
 
-        public ManageUserDetailsController(IUserService userService, IFavoriteService favorService)
+        public ManageUserDetailsController(IUserService userService, IMapper mapper)
         {
             this.userService = userService;
-            this.favorService = favorService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            var id = Guid.Parse(this.User.Identity.GetDetailsId());
-            var favorites = this.favorService
-                .GetAll()
-                .Where(f => f.Details_Id == id)
-                .Select(f => f.UserName)
-                .ToList();
+            // TODO: show favorites
+            // var id = Guid.Parse(this.User.Identity.GetDetailsId());
+            // var favorites = this.favorService
+            //    .GetAll()
+            //    .Where(f => f.Details_Id == id)
+            //    .Select(f => f.UserName)
+            //    .ToList();
 
             var users = this.userService
                 .GetAll()
-                .MapTo<ManageUserDetailsViewModel>()
+                .MapTo<ManageUserDetailsViewModel>()  // tests do not work
                 .ToList();
 
-            // TODO: show favorites
+            // for testing, but does not work too
+            // this.mapper.Map<ManageUserDetailsViewModel>(users);
 
             return this.View(users);
         }
