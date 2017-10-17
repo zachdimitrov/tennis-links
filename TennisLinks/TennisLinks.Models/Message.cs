@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TennisLinks.Models.Abstracts;
+using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
 {
-    public class Message : DataModel
+    public class Message : DataModel, IMessage
     {
         [Required]
         [StringLength(50, MinimumLength = 3)]

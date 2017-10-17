@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using TennisLinks.Models.Abstracts;
+using TennisLinks.Models.Interfaces;
 
 namespace TennisLinks.Models
 {
-    public class Favorite : DataModel
+    public class Favorite : DataModel, IFavorite
     {
         public string UserName { get; set; }
 

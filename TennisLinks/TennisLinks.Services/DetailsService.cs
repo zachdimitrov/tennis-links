@@ -11,13 +11,11 @@ namespace TennisLinks.Services
     {
         private ISaveContext context;
         private readonly IEfRepository<Details> generalRepo;
-        private MsSqlDbContext db;
 
-        public DetailsService(IEfRepository<Details> generalRepo, ISaveContext context, MsSqlDbContext db)
+        public DetailsService(IEfRepository<Details> generalRepo, ISaveContext context)
         {
             this.generalRepo = generalRepo;
             this.context = context;
-            this.db = db;
         }
 
         public IQueryable<Details> GetAll()
