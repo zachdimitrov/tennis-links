@@ -6,10 +6,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TennisLinks.Web.Models.Manage;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TennisLinks.Web.Controllers
 {
     [Authorize]
+    [ExcludeFromCodeCoverage]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

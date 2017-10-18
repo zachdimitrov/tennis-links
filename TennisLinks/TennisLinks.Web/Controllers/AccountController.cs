@@ -11,10 +11,12 @@ using Microsoft.Owin.Security;
 using TennisLinks.Web.Models.Account;
 using TennisLinks.Models;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace TennisLinks.Web.Controllers
 {
     [Authorize]
+    [ExcludeFromCodeCoverage]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
