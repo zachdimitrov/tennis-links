@@ -16,8 +16,13 @@ Connect with other tennis players near you. Search for a partner to play with.
 - substitute MVC User classes with interfaces
 - add 404 error page (shows server error now)
 - add login inviter when someone try to open authorised link (shows error now)
+- add cities predefined table to search city from
 - add signalr notifications
 - use google api for position
+
+#### Todo: known bugs
+- allow creation of message with empty title
+- received messages are not displayed on Azure Deployed app (works locally!)
 
 #### Resources
 - [Skill Levels](https://www.tenniscanada.com/wp-content/uploads/2015/12/Self-Rating-Guide-English.pdf)
