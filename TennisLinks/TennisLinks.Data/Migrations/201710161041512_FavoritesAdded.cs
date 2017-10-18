@@ -2,7 +2,9 @@ namespace TennisLinks.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+    using System.Diagnostics.CodeAnalysis;
+
+    [ExcludeFromCodeCoverage]
     public partial class FavoritesAdded : DbMigration
     {
         public override void Up()

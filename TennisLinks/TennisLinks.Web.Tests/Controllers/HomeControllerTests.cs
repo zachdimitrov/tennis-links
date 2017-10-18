@@ -8,8 +8,22 @@ using TennisLinks.Web.Controllers;
 
 namespace TennisLinks.Web.Tests.Controllers.HomeTests
 {
-    public class IndexShould
+    public class HomeControllerTests
     {
+        [Test]
+        public void Constructor_Should_ReturnCorrect_HomeController_Instance_WhenParametersPassed()
+        {
+            // Arrange
+            var userServiceMock = new Mock<IUserService>();
+            var favServiceMock = new Mock<IFavoriteService>();
+
+            // Act
+            var controllerUT = new HomeController(userServiceMock.Object, favServiceMock.Object);
+
+            // Assert
+            Assert.IsNotNull(controllerUT);
+        }
+
         [Test]
         public void ReturnCorrect_Index_View()
         {

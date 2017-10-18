@@ -12,16 +12,14 @@ namespace TennisLinks.Web.Controllers
     [Authorize]
     public class MessagesController : Controller
     {
-        private readonly IMapper mapper;
+        // private readonly IMapper mapper;
         private readonly IUserService userService;
         private readonly IMessageService messageService;
 
         public MessagesController(
-            IMapper mapper,
             IUserService userService,
             IMessageService messageService)
         {
-            this.mapper = mapper;
             this.userService = userService;
             this.messageService = messageService;
         }
@@ -91,7 +89,7 @@ namespace TennisLinks.Web.Controllers
             return this.MessageValidationFailure();
         }
 
-        private HttpStatusCodeResult MessageValidationFailure()
+        public HttpStatusCodeResult MessageValidationFailure()
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Validation failed! Message was not sent!");
         }

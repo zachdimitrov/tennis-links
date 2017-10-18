@@ -1,19 +1,28 @@
 ﻿using AutoMapper;
 using Moq;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using TennisLinks.Models;
 using TennisLinks.Services.Interfaces;
 using TennisLinks.Web.Areas.Administration.Controllers;
-using TennisLinks.Web.Areas.Administration.Models;
 
 namespace TennisLinks.Web.Tests.Controllers.AdministrationTests
 {
     [TestFixture]
-    public class IndexShould
+    public class AdministrationControllerTests
     {
+        [Test]
+        public void Constructor_Should_ReturnCorrect_UsersAdministrationController_Instance_WhenParametersPassed()
+        {
+            // Arrange
+            var userServiceMock = new Mock<IUserService>();
+            var mapperMock = new Mock<IMapper>();
+
+            // Act
+            var controllerUT = new ManageUserDetailsController(userServiceMock.Object, mapperMock.Object);
+
+            // Assert
+            Assert.IsNotNull(controllerUT);
+        }
+
         [Test]
         public void ReturnCorrect_View()
         {

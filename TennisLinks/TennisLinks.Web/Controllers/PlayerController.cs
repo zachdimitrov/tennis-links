@@ -18,7 +18,7 @@ namespace TennisLinks.Web.Controllers
     [Authorize]
     public class PlayerController : Controller
     {
-        private readonly IMapper mapper;
+        // private readonly IMapper mapper;
         private readonly IUserService userService;
         private readonly IDetailsService detailsService;
         private readonly IClubService clubService;
@@ -26,14 +26,12 @@ namespace TennisLinks.Web.Controllers
         private readonly IPlayTimeService playTimeService;
 
         public PlayerController(
-            IMapper mapper,
             IUserService userService,
             IDetailsService detailsService,
             IClubService clubService,
             ICityService cityService,
             IPlayTimeService playTimeService)
         {
-            this.mapper = mapper;
             this.userService = userService;
             this.detailsService = detailsService;
             this.clubService = clubService;
@@ -184,12 +182,12 @@ namespace TennisLinks.Web.Controllers
             return this.DetailsValidationFailure();
         }
 
-        private HttpStatusCodeResult DetailsValidationFailure()
+        public HttpStatusCodeResult DetailsValidationFailure()
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "User details validation failed");
         }
 
-        private HttpStatusCodeResult ClubValidationFailure(string name)
+        public HttpStatusCodeResult ClubValidationFailure(string name)
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Club \"{name}\" does not exist. Add it first.");
         }

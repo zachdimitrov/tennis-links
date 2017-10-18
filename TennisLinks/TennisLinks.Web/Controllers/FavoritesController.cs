@@ -13,18 +13,15 @@ namespace TennisLinks.Web.Controllers
     [Authorize]
     public class FavoritesController : Controller
     {
-        private readonly IMapper mapper;
         private readonly IUserService userService;
         private readonly IDetailsService detailsService;
         private readonly IFavoriteService favService;
 
         public FavoritesController(
-            IMapper mapper,
             IUserService userService,
             IDetailsService detailsService,
             IFavoriteService favService)
         {
-            this.mapper = mapper;
             this.userService = userService;
             this.detailsService = detailsService;
             this.favService = favService;
