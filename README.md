@@ -23,6 +23,7 @@ Connect with other tennis players near you. Search for a partner to play with.
 #### Todo: known bugs
 - ~allow creation of message with empty recipient name~
 - ~received messages are not displayed on Azure Deployed app (works locally!)~
+- ~small user boxes don't arrange properly, large blank spaces appear~
 
 #### Resources
 - [Skill Levels](https://www.tenniscanada.com/wp-content/uploads/2015/12/Self-Rating-Guide-English.pdf)
