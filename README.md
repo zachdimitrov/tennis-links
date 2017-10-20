@@ -15,7 +15,7 @@ Connect with other tennis players near you. Search for a partner to play with.
 - add IMsSqlDbContect to ninject autoconfig - (typeof(),typeof()) and use it
 - substitute MVC User classes with interfaces
 - add 404 error page (shows server error now)
-- add login inviter when someone try to open authorised link (shows error now)
+- ~add login inviter when someone try to open authorised link (shows error now)~
 - add cities predefined table to search city from
 - add signalr notifications
 - use google api for position
