@@ -33,6 +33,14 @@ $(".message-to").change(function (e) {
 
                 $(".send-button")
                     .attr("disabled", true);
+            } else if (recipient.length < 3) {
+                $("#error-message")
+                .html("Sorry, name must be more than 3 symbols long!")
+                .removeClass("hidden")
+                .show();
+
+                $(".send-button")
+                    .attr("disabled", true);
             } else {
                 $("#error-message")
                     .fadeOut()

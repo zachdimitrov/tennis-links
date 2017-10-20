@@ -292,7 +292,7 @@
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\PublishProfiles\tennis-links - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\tennis-links - Web Deploy.pubxml" />
-    <None Include="Views\Shared\_ReceivedMessagePartial.cshtml" />
+    <Content Include="Views\Shared\_ReceivedMessagePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

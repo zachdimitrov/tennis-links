@@ -50,6 +50,7 @@ namespace TennisLinks.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult All()
         {
             var id = Guid.Parse(this.User.Identity.GetDetailsId());
@@ -80,6 +81,7 @@ namespace TennisLinks.Web.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Search()
         {
             return this.View(new UserSearchViewModel() { FoundUsers = new List<UserSearchResultViewModel>() });
