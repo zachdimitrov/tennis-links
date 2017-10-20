@@ -6,7 +6,7 @@ nuget:
 
 skip_commits:
   files:
-    - */*.md
+    - '**/*.md'
     
 before_build:
 - cmd: nuget restore ./TennisLinks/TennisLinks.sln
