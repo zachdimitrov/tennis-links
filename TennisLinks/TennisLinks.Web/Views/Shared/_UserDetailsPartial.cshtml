@@ -3,7 +3,7 @@
 
 @model UserSearchResultViewModel
 
-<div class="player-details-wrapper col-xs-12 col-sm-4 col-md-3">
+<div class="player-details-wrapper col-xs-12 col-sm-4 col-md-4 col-lg-3">
     <div class="player-details">
         <img src="~/Content/Images/tennis-default.png" alt="Player" />
         <h2>@Model.UserName</h2>
@@ -48,16 +48,18 @@
                 }
             </tr>
         </table>
-        <a href="/messages/write?recipient=@Model.UserName" current="@User.Identity.GetUserName()" id="msg-@Model.UserName" class="write-message btn btn-sm btn-warning">MESSAGE</a>
+        <div class="button-group">
+            <a href="/messages/write?recipient=@Model.UserName" current="@User.Identity.GetUserName()" id="msg-@Model.UserName" class="write-message btn btn-sm btn-warning">MESSAGE</a>
 
-        @if (!Model.Favorite)
-        {
-            <a href="/favorites/add?username=@Model.UserName" id="add-@Model.UserName" class="btn btn-sm btn-success">FAVOURITE</a>
-        }
-        else
-        {
-            <a href="/favorites/remove?username=@Model.UserName" id="rem-@Model.UserName" class="btn btn-sm btn-default">UNFAVOUR</a>
-        }
-        <a class="btn btn btn-sm btn-info" href="/player/details?username=@Model.UserName">DETAILS</a>
+            @if (!Model.Favorite)
+            {
+                <a href="/favorites/add?username=@Model.UserName" id="add-@Model.UserName" class="btn btn-sm btn-success">FAVOURITE</a>
+            }
+            else
+            {
+                <a href="/favorites/remove?username=@Model.UserName" id="rem-@Model.UserName" class="btn btn-sm btn-default">UNFAVOUR</a>
+            }
+            <a class="btn btn btn-sm btn-info" href="/player/details?username=@Model.UserName">DETAILS</a>
+        </div>
     </div>
 </div>

@@ -217,6 +217,11 @@ h3, h4 {
     margin: 10px 10px 0 0;
 }
 
+.player-details .button-group {
+    position: absolute;
+    bottom: 10px;
+}
+
 .player-details .btn {
     border: 1px solid grey;
 }
