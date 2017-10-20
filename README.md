@@ -10,6 +10,20 @@
 #### Project Description
 Connect with other tennis players near you. Search for a partner to play with.
 
+#### Todo: ideas from trainer on project defence
+- refactor repository pattern, use IDbSets instead of EfRepository
+- add IMsSqlDbContect to ninject autoconfig - (typeof(),typeof()) and use it
+- substitute MVC User classes with interfaces
+- add 404 error page (shows server error now)
+- add login inviter when someone try to open authorised link (shows error now)
+- add cities predefined table to search city from
+- add signalr notifications
+- use google api for position
+
+#### Todo: known bugs
+- allow creation of message with empty title
+- ~received messages are not displayed on Azure Deployed app (works locally!)~
+
 #### Resources
 - [Skill Levels](https://www.tenniscanada.com/wp-content/uploads/2015/12/Self-Rating-Guide-English.pdf)
 - [Court Surfaces](http://www.itftennis.com/technical/courts/classified-surfaces/about-court-pace-classification.aspx)
