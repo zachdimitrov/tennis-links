@@ -21,7 +21,7 @@ Connect with other tennis players near you. Search for a partner to play with.
 - use google api for position
 
 #### Todo: known bugs
-- allow creation of message with empty title
+- ~allow creation of message with empty recipient name~
 - ~received messages are not displayed on Azure Deployed app (works locally!)~
 
 #### Resources
