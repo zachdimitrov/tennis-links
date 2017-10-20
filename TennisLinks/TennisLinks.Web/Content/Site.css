@@ -204,6 +204,7 @@ h3, h4 {
 }
 
 .player-details {
+    height:344px;
     padding: 0 5px 5px;
     background: #fff;
     border: 1px solid grey;

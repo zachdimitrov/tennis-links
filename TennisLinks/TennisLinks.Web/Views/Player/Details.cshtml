@@ -1,4 +1,5 @@
-﻿@using TennisLinks.Web.Models.Home
+﻿@using Microsoft.AspNet.Identity
+@using TennisLinks.Web.Models.Home
 @model UserSearchResultViewModel
 
 @{
@@ -7,10 +8,16 @@
 
 <h2>@ViewBag.Title</h2>
 
-<h4>Review your user details</h4>
-
-<h5>Click update button to change your account info</h5>
-<h5>Click other options button for other account settings</h5>
+@if (Model.UserName == @User.Identity.GetUserName())
+{
+    <h4>Review your user details</h4>
+    <h5>Click update button to change your account info</h5>
+    <h5>Click other options button for other account settings</h5>
+}
+else
+{
+    <h4>Review @Model.UserName's details</h4>
+}
 
 <hr />
 <div>
@@ -50,17 +57,33 @@
             </td>
         </tr>
         @*<tr>
-            <th scope="row">Favorite players:</th>
-            <td>
-                @{var players = Model.Favorites != null && Model.Favorites.Count() > 0 ? string.Join(", ", @Model.Favorites) : "You have no favorite players.";} @players
-            </td>
-        </tr>*@
+                <th scope="row">Favorite players:</th>
+                <td>
+                    @{var players = Model.Favorites != null && Model.Favorites.Count() > 0 ? string.Join(", ", @Model.Favorites) : "You have no favorite players.";} @players
+                </td>
+            </tr>*@
         <tr>
             <th scope="row">Personal info:</th>
             <td> @Model.Info</td>
         </tr>
     </table>
 
-    <a href="/player/updatedetails" class="btn btn-primary">UPDATE YOUR INFO HERE</a>
-    <a href="/manage" class="orange-button btn btn-warning">OTHER OPTIONS</a>
+    @if (Model.UserName == @User.Identity.GetUserName())
+    {
+        <a href="/player/updatedetails" class="btn btn-primary">UPDATE YOUR INFO HERE</a>
+        <a href="/manage" class="orange-button btn btn-warning">OTHER OPTIONS</a>
+    }
+    else
+    {
+        <a href="/messages/write?recipient=@Model.UserName" current="@User.Identity.GetUserName()" id="msg-@Model.UserName" class="write-message btn btn-warning">MESSAGE</a>
+
+        if (!Model.Favorite)
+        {
+            <a href="/favorites/add?username=@Model.UserName" id="add-@Model.UserName" class="btn btn-success">FAVOURITE</a>
+        }
+        else
+        {
+            <a href="/favorites/remove?username=@Model.UserName" id="rem-@Model.UserName" class="btn btn-default">UNFAVOUR</a>
+        }
+    }
 </div>

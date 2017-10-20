@@ -16,6 +16,7 @@ namespace TennisLinks.Web.Tests.Controllers
             var detailsServiceMock = new Mock<IDetailsService>();
             var clubServiceMock = new Mock<IClubService>();
             var cityServiceMock = new Mock<ICityService>();
+            var favorServiceMock = new Mock<IFavoriteService>();
             var playTimeServiceMock = new Mock<IPlayTimeService>();
 
             // Act
@@ -24,6 +25,7 @@ namespace TennisLinks.Web.Tests.Controllers
                 detailsServiceMock.Object,
                 clubServiceMock.Object,
                 cityServiceMock.Object,
+                favorServiceMock.Object,
                 playTimeServiceMock.Object);
 
             // Assert
@@ -38,14 +40,16 @@ namespace TennisLinks.Web.Tests.Controllers
             var detailsServiceMock = new Mock<IDetailsService>();
             var clubServiceMock = new Mock<IClubService>();
             var cityServiceMock = new Mock<ICityService>();
+            var favorServiceMock = new Mock<IFavoriteService>();
             var playTimeServiceMock = new Mock<IPlayTimeService>();
 
             // Act
             var controllerUT = new PlayerController(
-                userServiceMock.Object, 
+                userServiceMock.Object,
                 detailsServiceMock.Object,
                 clubServiceMock.Object,
                 cityServiceMock.Object,
+                favorServiceMock.Object,
                 playTimeServiceMock.Object);
 
             var failure = controllerUT.DetailsValidationFailure();
@@ -62,6 +66,7 @@ namespace TennisLinks.Web.Tests.Controllers
             var detailsServiceMock = new Mock<IDetailsService>();
             var clubServiceMock = new Mock<IClubService>();
             var cityServiceMock = new Mock<ICityService>();
+            var favorServiceMock = new Mock<IFavoriteService>();
             var playTimeServiceMock = new Mock<IPlayTimeService>();
 
             // Act
@@ -70,6 +75,7 @@ namespace TennisLinks.Web.Tests.Controllers
                 detailsServiceMock.Object,
                 clubServiceMock.Object,
                 cityServiceMock.Object,
+                favorServiceMock.Object,
                 playTimeServiceMock.Object);
 
             var failure = controllerUT.ClubValidationFailure("Pesho");

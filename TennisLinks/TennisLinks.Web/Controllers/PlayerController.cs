@@ -23,6 +23,7 @@ namespace TennisLinks.Web.Controllers
         private readonly IDetailsService detailsService;
         private readonly IClubService clubService;
         private readonly ICityService cityService;
+        private readonly IFavoriteService favorService;
         private readonly IPlayTimeService playTimeService;
 
         public PlayerController(
@@ -30,27 +31,59 @@ namespace TennisLinks.Web.Controllers
             IDetailsService detailsService,
             IClubService clubService,
             ICityService cityService,
+            IFavoriteService favorService,
             IPlayTimeService playTimeService)
         {
             this.userService = userService;
             this.detailsService = detailsService;
             this.clubService = clubService;
             this.cityService = cityService;
+            this.favorService = favorService;
             this.playTimeService = playTimeService;
         }
 
         //
         // GET: /Player/Details
         [HttpGet]
-        public ActionResult Details()
+        public ActionResult Details(string username)
         {
-            var id = this.User.Identity.GetUserId();
+            UserSearchResultViewModel user = null;
 
-            var user = this.userService
-                .GetAll()
-                .Where(u=>u.Id == id)
-                .MapTo<UserSearchResultViewModel>()
-                .First();
+            if (username != null && username is string)
+            {
+                var id = Guid.Parse(this.User.Identity.GetDetailsId());
+                var favorites = this.favorService
+                    .GetAll()
+                    .Where(f => f.Details_Id == id)
+                    .Select(f => f.UserName)
+                    .ToList();
+
+                user = this.userService
+                    .GetAll()
+                    .Where(u => u.UserName == username)
+                    .MapTo<UserSearchResultViewModel>()
+                    .First();
+
+                    if (favorites.Contains(user.UserName))
+                    {
+                    user.Favorite = true;
+                    }
+                    else
+                    {
+                    user.Favorite = false;
+                    }
+
+            }
+            else
+            {
+                 var id = this.User.Identity.GetUserId();
+
+                 user = this.userService
+                    .GetAll()
+                    .Where(u => u.Id == id)
+                    .MapTo<UserSearchResultViewModel>()
+                    .First();
+            }
 
             return View(user);
         }
@@ -64,7 +97,7 @@ namespace TennisLinks.Web.Controllers
 
             var allClubs = this.clubService
                 .GetAll()
-                .Select(x=>x.Name)
+                .Select(x => x.Name)
                 .ToList();
 
             var allPlayTimes = this.playTimeService
@@ -104,27 +137,27 @@ namespace TennisLinks.Web.Controllers
 
             if (model.Club != null)
             {
-                    var club = this.clubService
-                        .GetAll()
-                        .Where(x => x.Name == model.Club)
-                        .First();
+                var club = this.clubService
+                    .GetAll()
+                    .Where(x => x.Name == model.Club)
+                    .First();
 
-                    if (club == null)
-                    {
-                        return this.ClubValidationFailure(model.Club);
-                    }
+                if (club == null)
+                {
+                    return this.ClubValidationFailure(model.Club);
+                }
 
-                    details.Club_Id = club.Id;
+                details.Club_Id = club.Id;
             }
 
             if (model.PlayTime != null)
             {
-                    var time = this.playTimeService
-                        .GetAll()
-                        .Where(x => x.Time.ToString() == model.PlayTime)
-                        .First();
+                var time = this.playTimeService
+                    .GetAll()
+                    .Where(x => x.Time.ToString() == model.PlayTime)
+                    .First();
 
-                    details.PlayTime_Id = time.Id;
+                details.PlayTime_Id = time.Id;
             }
 
             if (model.City != null && model.City.Length > 2)
@@ -147,7 +180,7 @@ namespace TennisLinks.Web.Controllers
                 details.City_Id = city.Id;
             }
 
-            if(model.Age > 0)
+            if (model.Age > 0)
             {
                 details.Age = model.Age;
             }
