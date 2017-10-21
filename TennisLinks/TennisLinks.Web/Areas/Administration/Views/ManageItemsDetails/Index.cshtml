@@ -1,0 +1,33 @@
+﻿@using GridMvc.Html
+@using TennisLinks.Web.Areas.Administration.Models
+
+@model AllDetailsViewModel
+
+@{
+    ViewBag.Title = "Application items details administration";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h4>Review all items details here</h4>
+
+<hr />
+
+<h3>Users</h3>
+<div class="text-left">
+    @Html.Grid(Model.Users).AutoGenerateColumns().Sortable().Filterable().WithPaging(10)
+</div>
+
+<hr />
+
+<h3>Cities</h3>
+<div class="text-left">
+    @Html.Grid(Model.Cities).AutoGenerateColumns().Sortable().Filterable().WithPaging(10)
+</div>
+
+<hr />
+
+<h3>Clubs</h3>
+<div class="text-left">
+    @Html.Grid(Model.Clubs).AutoGenerateColumns().Sortable().Filterable().WithPaging(10)
+</div>

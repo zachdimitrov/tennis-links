@@ -1,0 +1,15 @@
+﻿<h2>Create new items</h2>
+<h4>Choose what you want to create from the buttons below</h4>
+<hr />
+
+<div>
+    @Html.ActionLink("Create new City", "City", "CreateInfo",
+    new { area = "Administration" },
+    new { @class = "btn btn-lg btn-info", style = "width:250px;margin:10px 20px;" })
+</div>
+<div>
+    @Html.ActionLink("Create new Club", "Club", "CreateInfo",
+    new { area = "Administration" },
+    new { @class = "btn btn-lg btn-warning", style = "width:250px;margin:10px 20px;" })
+</div>
+
