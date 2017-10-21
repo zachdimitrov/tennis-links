@@ -3,7 +3,11 @@ branches:
   - master
 nuget:
   project_feed: true
-  
+
+skip_commits:
+  files:
+    - '**/*.md'
+    
 before_build:
 - cmd: nuget restore ./TennisLinks/TennisLinks.sln
 
