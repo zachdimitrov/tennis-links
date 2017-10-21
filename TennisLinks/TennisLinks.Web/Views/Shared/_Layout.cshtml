@@ -34,7 +34,7 @@
                     @{
                         if (this.User.IsInRole("Admin"))
                         {
-                            <li>@Html.ActionLink("Administration", "Index", "ManageUserDetails", new { area = "Administration" }, null)</li>
+                            <li>@Html.ActionLink("Administration", "Index", "ManageItemsDetails", new { area = "Administration" }, null)</li>
                         }
                     }
                 </ul>
@@ -52,6 +52,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/masonry")
     @RenderSection("scripts", required: false)
 </body>
 </html>

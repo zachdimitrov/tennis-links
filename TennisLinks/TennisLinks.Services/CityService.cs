@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TennisLinks.Data.Interfaces;
 using TennisLinks.Models;
 using TennisLinks.Services.Interfaces;
@@ -31,6 +33,26 @@ namespace TennisLinks.Services
         {
             this.citiesRepo.Update(city);
             return this.context.Commit();
+        }
+
+        public IEnumerable<string> GetAllNames()
+        {
+            return this.citiesRepo
+                .All
+                .Select(x => x.Name)
+                .ToList();
+        }
+
+        public int AddByName(string name)
+        {
+            return this.Add(new City() { Name = name });
+        }
+
+        public City GetByName(string name)
+        {
+            return this.GetAll()
+                .Where(x => x.Name == name)
+                .FirstOrDefault();
         }
     }
 }

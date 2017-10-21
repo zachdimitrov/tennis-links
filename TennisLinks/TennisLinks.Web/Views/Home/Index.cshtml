@@ -7,49 +7,57 @@
 <div class="jumbotron">
     <h1>Tennis Links</h1>
     <p class="lead">Tennis Links helps you connect with other tennis players near by. Search for a partner to play with. Or just have fun!</p>
-    <p>@Html.ActionLink("Your personal messages", "All", "Messages", null, new { @class = "btn btn-primary" })</p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>@Html.ActionLink("Your personal messages", "All", "Messages", null, new { @class = "btn btn-primary" })</p>
+    }
+    else
+    {
+        <p>@Html.ActionLink("Login to see your messages", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary" })</p>
+    }
+
 </div>
-    <div class="images-box row">
-        <div class="images-box-wrapper col-xs-6 col-sm-3">
-            <div class="home-image">
-                <img src="~/Content/Images/Capture1.png" alt="home image" />
-            </div>
-        </div>
-        <div class="images-box-wrapper col-xs-6 col-sm-3">
-            <div class="home-image">
-                <img src="~/Content/Images/Capture2.png" alt="home image" />
-            </div>
-        </div>
-        <div class="images-box-wrapper col-xs-6 col-sm-3">
-            <div class="home-image">
-                <img src="~/Content/Images/Capture3.png" alt="home image" />
-            </div>
-        </div>
-        <div class="images-box-wrapper col-xs-6 col-sm-3">
-            <div class="home-image">
-                <img src="~/Content/Images/Capture4.png" alt="home image" />
-            </div>
+<div class="images-box row">
+    <div class="images-box-wrapper col-xs-6 col-sm-3">
+        <div class="home-image">
+            <img src="~/Content/Images/Capture1.png" alt="home image" />
         </div>
     </div>
+    <div class="images-box-wrapper col-xs-6 col-sm-3">
+        <div class="home-image">
+            <img src="~/Content/Images/Capture2.png" alt="home image" />
+        </div>
+    </div>
+    <div class="images-box-wrapper col-xs-6 col-sm-3">
+        <div class="home-image">
+            <img src="~/Content/Images/Capture3.png" alt="home image" />
+        </div>
+    </div>
+    <div class="images-box-wrapper col-xs-6 col-sm-3">
+        <div class="home-image">
+            <img src="~/Content/Images/Capture4.png" alt="home image" />
+        </div>
+    </div>
+</div>
 <div class="front-box row">
-    <div class="col-md-4">
+    <div class="fp-info-box col-md-4">
         <h2>Search for partner</h2>
         <p>
             If you really wish to play tennis, but have no one to play with you can search for a partner here and contact them with personal message.
         </p>
         <p>
-            @Html.ActionLink("Search", "Search", "Home", new { @class = "btn btn-default" })
-        @*<a class="btn btn-default" href="#">Search &raquo;</a>*@
+            @Html.ActionLink("Search »", "Search", "Home", new { @class = "btn btn-default fp-button" })
+            @*<a class="btn btn-default" href="#">Search &raquo;</a>*@
         </p>
     </div>
-    <div class="col-md-4">
+    <div class="fp-info-box col-md-4">
         <h2>Update your profile</h2>
         <p>If you didn't update your profile yet do it now and more people will contact you based on your skill level and personal info.</p>
-        <p><a class="btn btn-default" href="/player/details">Profile &raquo;</a></p>
+        <p><a class="btn btn-default fp-button" href="/player/details">Profile &raquo;</a></p>
     </div>
-    <div class="col-md-4">
+    <div class="fp-info-box col-md-4">
         <h2>Compare with other players</h2>
         <p>You can browse all registered players and contact them if you share common skills, play hours and area.</p>
-        <p><a class="btn btn-default" href="/home/all">Players &raquo;</a></p>
+        <p><a class="btn btn-default fp-button" href="/home/all">Players &raquo;</a></p>
     </div>
 </div>

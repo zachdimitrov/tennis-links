@@ -20,6 +20,10 @@ namespace TennisLinks.Web.Models.Home
         [Display(Name = "Time Available")]
         public string SearchTime { get; set; }
 
+        public IEnumerable<string> Clubs { get; set; }
+
+        public IEnumerable<string> Cities { get; set; }
+
         public IEnumerable<UserSearchResultViewModel> FoundUsers { get; set; }
     }
 }

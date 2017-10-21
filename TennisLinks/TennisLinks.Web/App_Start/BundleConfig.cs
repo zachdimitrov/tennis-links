@@ -14,6 +14,9 @@ namespace TennisLinks.Web
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/masonry").Include(
+                        "~/Scripts/External/masonry.pkgd.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/local").Include(
                         "~/Scripts/Local/*.js"));
 

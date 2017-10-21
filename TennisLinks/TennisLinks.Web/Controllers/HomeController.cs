@@ -14,11 +14,19 @@ namespace TennisLinks.Web.Controllers
     {
         private readonly IUserService userService;
         private readonly IFavoriteService favorService;
+        private readonly IClubService clubService;
+        private readonly ICityService cityService;
 
-        public HomeController(IUserService userService, IFavoriteService favorService)
+        public HomeController(
+            IUserService userService, 
+            IFavoriteService favorService, 
+            IClubService clubService,
+            ICityService cityService)
         {
             this.userService = userService;
             this.favorService = favorService;
+            this.clubService = clubService;
+            this.cityService = cityService;
         }
 
         public ActionResult Index()
@@ -84,12 +92,25 @@ namespace TennisLinks.Web.Controllers
         [Authorize]
         public ActionResult Search()
         {
-            return this.View(new UserSearchViewModel() { FoundUsers = new List<UserSearchResultViewModel>() });
+            var clubs = this.clubService.GetAllNames();
+            var cities = this.cityService.GetAllNames();
+
+            var model = new UserSearchViewModel()
+            {
+                FoundUsers = new List<UserSearchResultViewModel>(),
+                Clubs = clubs,
+                Cities = cities
+            };
+
+            return this.View(model);
         }
 
         [HttpPost]
         public ActionResult Search(UserSearchViewModel model)
         {
+            var clubs = this.clubService.GetAllNames();
+            var cities = this.cityService.GetAllNames();
+
             var id = Guid.Parse(this.User.Identity.GetDetailsId());
             var favorites = this.favorService
                 .GetAll()
@@ -97,15 +118,15 @@ namespace TennisLinks.Web.Controllers
                 .Select(f => f.UserName)
                 .ToList();
 
-
             var users = this.userService
                 .GetAll()
                 .MapTo<UserSearchResultViewModel>()
-                .Where(x => x.UserName.ToLower().Contains(model.SearchUserName.ToLower()) ||
-                            x.Skill == model.SearchSkill ||
-                            x.City == model.SearchCity ||
-                            x.Club == model.SearchClub ||
-                                (model.SearchTime == null ||
+                .Where(x => (model.SearchUserName == null || 
+                      x.UserName.ToLower().Contains(model.SearchUserName.ToLower())) &&
+                            (model.SearchSkill == 0 || x.Skill == model.SearchSkill) &&
+                            (model.SearchCity == null || x.City == model.SearchCity) &&
+                            (model.SearchClub == null || x.Club == model.SearchClub) &&
+                            (model.SearchTime == null ||
                                 model.SearchTime == "all" ||
                                 x.PlayTime == model.SearchTime))
                 .ToList();
@@ -123,6 +144,8 @@ namespace TennisLinks.Web.Controllers
             }
 
             model.FoundUsers = users;
+            model.Clubs = clubs;
+            model.Cities = cities;
 
             return View(model);
         }

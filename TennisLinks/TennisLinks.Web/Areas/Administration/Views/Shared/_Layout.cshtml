@@ -35,7 +35,8 @@
                     @{
                         if (this.User.IsInRole("Admin"))
                         {
-                            <li>@Html.ActionLink("Administration", "Index", "ManageUserDetails", new { area = "Administration" }, null)</li>
+                            <li>@Html.ActionLink("Administration", "Index", "ManageItemsDetails", new { area = "Administration" }, null)</li>
+                            <li>@Html.ActionLink("Create new items", "Index", "CreateInfo", new { area = "Administration" }, null)</li>
                         }
                     }
                 </ul>

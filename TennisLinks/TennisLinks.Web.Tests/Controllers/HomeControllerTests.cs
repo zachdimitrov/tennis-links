@@ -16,9 +16,15 @@ namespace TennisLinks.Web.Tests.Controllers.HomeTests
             // Arrange
             var userServiceMock = new Mock<IUserService>();
             var favServiceMock = new Mock<IFavoriteService>();
+            var clubServiceMock = new Mock<IClubService>();
+            var cityServiceMock = new Mock<ICityService>();
 
             // Act
-            var controllerUT = new HomeController(userServiceMock.Object, favServiceMock.Object);
+            var controllerUT = new HomeController(
+                userServiceMock.Object, 
+                favServiceMock.Object, 
+                clubServiceMock.Object,
+                cityServiceMock.Object);
 
             // Assert
             Assert.IsNotNull(controllerUT);
@@ -30,9 +36,14 @@ namespace TennisLinks.Web.Tests.Controllers.HomeTests
             // Arrange
             var userServiceMock = new Mock<IUserService>();
             var favServiceMock = new Mock<IFavoriteService>();
-            var controllerUT = new HomeController(userServiceMock.Object, favServiceMock.Object);
+            var clubServiceMock = new Mock<IClubService>();
+            var cityServiceMock = new Mock<ICityService>();
 
-            userServiceMock.Setup(u => u.GetAll()).Returns(It.IsAny<IQueryable<User>>());
+            var controllerUT = new HomeController(
+                userServiceMock.Object,
+                favServiceMock.Object,
+                clubServiceMock.Object,
+                cityServiceMock.Object);
 
             // Act
             var result = controllerUT.Index() as ViewResult;
@@ -47,7 +58,14 @@ namespace TennisLinks.Web.Tests.Controllers.HomeTests
             // Arrange
             var userServiceMock = new Mock<IUserService>();
             var favServiceMock = new Mock<IFavoriteService>();
-            var controllerUT = new HomeController(userServiceMock.Object, favServiceMock.Object);
+            var clubServiceMock = new Mock<IClubService>();
+            var cityServiceMock = new Mock<ICityService>();
+
+            var controllerUT = new HomeController(
+                userServiceMock.Object,
+                favServiceMock.Object,
+                clubServiceMock.Object,
+                cityServiceMock.Object);
 
             userServiceMock.Setup(u => u.GetAll()).Returns(It.IsAny<IQueryable<User>>());
 
@@ -64,7 +82,14 @@ namespace TennisLinks.Web.Tests.Controllers.HomeTests
             // Arrange
             var userServiceMock = new Mock<IUserService>();
             var favServiceMock = new Mock<IFavoriteService>();
-            var controllerUT = new HomeController(userServiceMock.Object, favServiceMock.Object);
+            var clubServiceMock = new Mock<IClubService>();
+            var cityServiceMock = new Mock<ICityService>();
+
+            var controllerUT = new HomeController(
+                userServiceMock.Object,
+                favServiceMock.Object,
+                clubServiceMock.Object,
+                cityServiceMock.Object);
 
             userServiceMock.Setup(u => u.GetAll()).Returns(It.IsAny<IQueryable<User>>());
 

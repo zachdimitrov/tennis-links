@@ -14,32 +14,17 @@ namespace TennisLinks.Web.Tests.Controllers.AdministrationTests
         {
             // Arrange
             var userServiceMock = new Mock<IUserService>();
-            var mapperMock = new Mock<IMapper>();
+            var cityServiceMock = new Mock<ICityService>();
+            var clubServiceMock = new Mock<IClubService>();
 
             // Act
-            var controllerUT = new ManageUserDetailsController(userServiceMock.Object, mapperMock.Object);
+            var controllerUT = new ManageItemsDetailsController(
+                userServiceMock.Object,
+                cityServiceMock.Object,
+                clubServiceMock.Object);
 
             // Assert
             Assert.IsNotNull(controllerUT);
-        }
-
-        [Test]
-        public void ReturnCorrect_View()
-        {
-            //// Arrange
-            //var userServiceMock = new Mock<IUserService>();
-            //var mapperMock = new Mock<IMapper>();
-
-            //var controllerUT = new ManageUserDetailsController(userServiceMock.Object, mapperMock.Object);
-
-            //mapperMock.Setup(m => m.Map<object>(It.IsAny<object>())).Verifiable();
-            //userServiceMock.Setup(u => u.GetAll()).Returns(It.IsAny<IQueryable<User>>());
-
-            //// Act
-            //var result = controllerUT.Index() as ViewResult;
-
-            //// Assert
-            //Assert.AreEqual("Index", result.ViewName);
         }
     }
 }
