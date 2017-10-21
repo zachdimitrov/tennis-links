@@ -9,29 +9,32 @@
 
 #### Project Description
 Connect with other tennis players near you. Search for a partner to play with.
-#### Usage
-** Not authorized **
-1. View front page
-2. View site info and contacts
+#### Usage  
+**Not authorized**
 
-** For regular users **
-1. Login/Register new user
-2. View messages Inbox/Outbox
-3. Filter all other players by:
+- View front page
+- View site info and contacts
+
+**For regular users**  
+
+- Login/Register new user
+- View messages Inbox/Outbox
+- Filter all other players by:
   - Name
   - City (select from list)
   - Favorite club (select from list)
   - Skill Level (select from list)
   - Time of availability (select from list)
-4. Update profile details
-5. Browse all players
-6. Send Message to other player
-7 Add player to favorites
-8. View site info and contacts
+- Update profile details
+- Browse all players
+- Send Message to other player
+- Add player to favorites
+- View site info and contacts
 
-** For admin users **
-1. All for regular users
-2. View `Administration` page
+**For admin users**
+
+- All for regular users
+- View `Administration` page
 - Tables with info for:
   - Users
   - Cities
