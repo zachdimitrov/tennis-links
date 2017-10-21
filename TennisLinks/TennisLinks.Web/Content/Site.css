@@ -18,23 +18,22 @@
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
-.dl-horizontal dt, 
+.dl-horizontal dt,
 .dl-horizontal dd {
     white-space: normal;
     margin: 10px;
 }
 
-.dl-horizontal dd a {
-    min-width: 200px;
-    border: 1px solid grey;
-    box-shadow: 2px 2px 6px #808080;
-    color: black;
-}
+    .dl-horizontal dd a {
+        min-width: 200px;
+        border: 1px solid grey;
+        box-shadow: 2px 2px 6px #808080;
+        color: black;
+    }
 
-.dl-horizontal dd a:hover {
-    color: black;
-
-}
+        .dl-horizontal dd a:hover {
+            color: black;
+        }
 
 /* Set width on the form input elements since they're 100% wide by default */
 a,
@@ -47,7 +46,7 @@ textarea {
 }
 
 a {
-    color:#31ac00;
+    color: #31ac00;
     /*text-shadow: 1px 1px 1px #c6ff00;*/
 }
 
@@ -57,8 +56,8 @@ a {
     border: none;
 }
 
-footer a:hover, 
-footer a:focus, 
+footer a:hover,
+footer a:focus,
 footer a:active {
     color: #c6ff00;
 }
@@ -69,15 +68,15 @@ footer {
     background: #555;
 }
 
-footer p {
-    margin: 15px 0 0 0;
-line-height: 45px;
-color: white;
-}
+    footer p {
+        margin: 15px 0 0 0;
+        line-height: 45px;
+        color: white;
+    }
 
-footer p a {
-    color: #deffb4;
-}
+        footer p a {
+            color: #deffb4;
+        }
 
 hr {
     height: 1px;
@@ -86,66 +85,68 @@ hr {
     box-shadow: 0 1px 1px #999;
 }
 
-.btn-primary {
+.btn {
     border: 1px solid grey;
-    background-color: #deffb4 ;
-    color: #222;
     box-shadow: 2px 2px 6px #808080;
 }
 
-.btn-primary:hover {
-    border: 1px solid grey;
-    background-color: #c6ff00;
-    color: #000;
+.btn-primary {
+    background-color: #deffb4;
+    color: #222;
 }
 
-.btn-primary:active:focus {
-    border: 1px solid grey;
-    text-shadow: none;
-    color: #000;
-    background-color: #31ac00;
-    box-shadow: -2px -2px -6px #808080;
-}
+    .btn-primary:hover {
+        border: 1px solid grey;
+        background-color: #c6ff00;
+        color: #000;
+    }
 
-.navbar>.container {
-    padding-right: 40px!important;
+    .btn-primary:active:focus {
+        border: 1px solid grey;
+        text-shadow: none;
+        color: #000;
+        background-color: #31ac00;
+        box-shadow: -2px -2px -6px #808080;
+    }
+
+.navbar > .container {
+    padding-right: 40px !important;
 }
 
 .navbar-inverse,
 .navbar-inverse .navbar-toggle,
 .navbar-inverse .navbar-toggle:hover,
-.navbar-inverse .navbar-toggle:active:focus
- {
+.navbar-inverse .navbar-toggle:active:focus {
     background-color: #00695c;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-    color: #deffb4;
-    text-shadow: 1px 1px 2px #222;
-}
+    .navbar-inverse .navbar-nav > li > a {
+        color: #deffb4;
+        text-shadow: 1px 1px 2px #222;
+    }
 
-.navbar-inverse .navbar-nav > li:hover {
-    background-color: #002c1c;
-}
+    .navbar-inverse .navbar-nav > li:hover {
+        background-color: #002c1c;
+    }
 
 
-.navbar-inverse .navbar-nav > li > a:hover {
-    color: #c6ff00;
-}
+    .navbar-inverse .navbar-nav > li > a:hover {
+        color: #c6ff00;
+    }
 
-.navbar-inverse .navbar-brand {
-    font-family:'Indie Flower', cursive;
-    font-size: 3rem;
-    color: white;
-    text-shadow: 1px 1px 2px #222;
-}
+    .navbar-inverse .navbar-brand {
+        font-family: 'Indie Flower', cursive;
+        font-size: 3rem;
+        color: white;
+        text-shadow: 1px 1px 2px #222;
+    }
 
-.navbar-inverse .navbar-brand:hover {
-    color: #c6ff00;
-}
+        .navbar-inverse .navbar-brand:hover {
+            color: #c6ff00;
+        }
 
 .navbar-inverse {
-   border-bottom: 1px solid white;
+    border-bottom: 1px solid white;
 }
 
 .navbar-header img {
@@ -160,14 +161,14 @@ hr {
 }
 
 h1, h2 {
-    font-family:'Indie Flower', cursive;
-    color:#000;
+    font-family: 'Indie Flower', cursive;
+    color: #000;
     text-shadow: 1px 1px 1px #c6ff00;
 }
 
 h3, h4 {
-    font-family:'Indie Flower', cursive;
-    color:#31ac00;
+    font-family: 'Indie Flower', cursive;
+    color: #31ac00;
     text-shadow: 1px 1px 1px #c6ff00;
 }
 
@@ -181,13 +182,6 @@ h3, h4 {
     text-shadow: 2px 2px 2px #333;
 }
 
-@media(max-width: 420px) {
-    .player-details .glyphicon-star {
-        top: 10px;
-    }
-}
-
-
 /* custom selector styles */
 
 .front-box {
@@ -195,55 +189,56 @@ h3, h4 {
 }
 
 .player-box {
-    padding: 10px;
-
+    padding: 0;
 }
 
 .player-details-wrapper {
+    width: 230px;
     padding: 5px !important;
 }
 
 .player-details {
-    height:344px;
-    padding: 0 5px 5px;
+    /*height:344px;*/
+    width: auto;
+    padding: 0 8px 8px;
     background: #fff;
     border: 1px solid grey;
     box-shadow: 3px 3px 8px #555;
 }
 
-.player-details img {
-    width: 5rem;
-    float: left;
-    margin: 10px 10px 0 0;
-}
+    .player-details img {
+        width: 5rem;
+        float: left;
+        margin: 10px 10px 0 0;
+    }
 
-.player-details .button-group {
+    /*.player-details .button-group {
     position: absolute;
     bottom: 10px;
-}
+}*/
 
-.player-details .btn {
-    border: 1px solid grey;
-}
+    .player-details .btn {
+        padding: 4px 7px;
+        border: 1px solid grey;
+    }
 
 .user-details-table {
     line-height: 4rem;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
-.user-details-table th {
-    padding: 0 30px;
-}
+    .user-details-table th {
+        padding: 0 30px;
+    }
 
-.user-details-table td {
-    padding: 0 30px;
-}
+    .user-details-table td {
+        padding: 0 30px;
+    }
 
 /* Messages container */
 
 .message-box {
     padding: 10px 20px;
-
 }
 
 .message-details-wrapper {
@@ -257,20 +252,24 @@ h3, h4 {
     box-shadow: 3px 3px 8px #555;
 }
 
-.message-details img {
-    width: 5rem;
-    float: left;
-    margin: 10px 10px 0 0;
-}
+    .message-details img {
+        width: 5rem;
+        float: left;
+        margin: 10px 10px 0 0;
+    }
 
-.message-details .btn {
-    border: 1px solid grey;
-}
+    .message-details .btn {
+        border: 1px solid grey;
+    }
 
 /* handle errors on screen */
 
 #error-message {
     color: indianred;
+}
+
+#success-message {
+    color: #0015ff!important;
 }
 
 /* other options */
@@ -283,37 +282,90 @@ h3, h4 {
     box-shadow: 2px 2px 6px #808080;
 }
 
-.orange-button:hover,
-.orange-button:active:focus {
-    background-color: orange;
-    color: black;
-    border: 1px solid grey;
-}
-
-.images-box {
-    padding: 0 60px;
-    padding-bottom: 30px;
-}
-
-@media(max-width:760px) {
-    .images-box {
-    padding: 0 10px;
-    padding-bottom: 10px;
-}
-
-}
+    .orange-button:hover,
+    .orange-button:active:focus {
+        background-color: orange;
+        color: black;
+        border: 1px solid grey;
+    }
 
 .home-image {
     background: white;
-    margin-bottom:30px;
-}
-
-.images-box-wrapper img {
-    max-width: 100%;
-    padding: 8px;
-    box-shadow: 2px 2px 6px #808080;
+    margin-bottom: 20px;
 }
 
 .jumbotron {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
+}
+
+.images-box {
+    padding: 0 15px;
+    padding-bottom: 10px;
+}
+
+.images-box-wrapper {
+    padding: 0 8px;
+}
+
+    .images-box-wrapper img {
+        max-width: 100%;
+        padding: 8px;
+        box-shadow: 2px 2px 6px #808080;
+    }
+
+@media(max-width: 519px) {
+    .player-details .glyphicon-star {
+        top: 10px;
+    }
+
+    .player-details-wrapper {
+        width: 100%;
+        padding: 5px !important;
+    }
+}
+
+@media (min-width: 520px) {
+    .container {
+        width: 498px !important;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 732px !important;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 966px !important;
+    }
+
+    .images-box {
+        padding: 0 60px;
+        padding-bottom: 30px;
+    }
+
+    .images-box-wrapper {
+        padding: 0 15px;
+    }
+
+    .fp-info-box {
+        height: 220px;
+    }
+
+    .fp-button {
+        position: absolute;
+        bottom: 20px;
+    }
+}
+
+@media (min-width: 1250px) {
+    .container {
+        width: 1200px !important;
+    }
+
+    .fp-info-box {
+        height: 200px;
+    }
 }
