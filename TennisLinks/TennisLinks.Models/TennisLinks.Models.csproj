@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstracts\DataModel.cs" />
+    <Compile Include="Attributes\ImageValidationAttribute.cs" />
     <Compile Include="Attributes\SkillValidationAttribute.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Club.cs" />

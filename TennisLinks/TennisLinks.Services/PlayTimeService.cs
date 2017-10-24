@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TennisLinks.Data.Interfaces;
 using TennisLinks.Models;
 using TennisLinks.Services.Interfaces;
@@ -20,6 +22,14 @@ namespace TennisLinks.Services
         {
             return this.playTimesRepo.All;
         }
+
+        public IEnumerable<string> GetAllTimes()
+        {
+            return this.playTimesRepo.All
+                .Select(x => x.Time.ToString())
+                .ToList();
+        }
+
         public int Update(PlayTime time)
         {
             this.playTimesRepo.Update(time);

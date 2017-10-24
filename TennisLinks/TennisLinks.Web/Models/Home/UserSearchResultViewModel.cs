@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using System.Collections.Generic;
 using TennisLinks.Models;
 using TennisLinks.Web.Infrastructure;
 
@@ -26,7 +27,11 @@ namespace TennisLinks.Web.Models.Home
 
         public string Club { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public bool Favorite { get; set; }
+
+        public IEnumerable<string> Favorites { get; set; }
 
         public void CreateMappings(IMapperConfigurationExpression configuration)
         {
@@ -35,6 +40,7 @@ namespace TennisLinks.Web.Models.Home
                 .ForMember(viewModel => viewModel.Gender, cfg => cfg.MapFrom(model => model.Details.Gender.ToString()))
                 .ForMember(viewModel => viewModel.Info, cfg => cfg.MapFrom(model => model.Details.Info))
                 .ForMember(viewModel => viewModel.Skill, cfg => cfg.MapFrom(model => model.Details.Skill))
+                .ForMember(viewModel => viewModel.ImageUrl, cfg => cfg.MapFrom(model => model.Details.ImageUrl))
                 .ForMember(viewModel => viewModel.PlayTime, cfg => cfg.MapFrom(model => model.Details.PlayTime.Time.ToString()))
                 .ForMember(viewModel => viewModel.Club, cfg => cfg.MapFrom(model => model.Details.Club.Name))
                 .ForMember(viewModel => viewModel.City, cfg => cfg.MapFrom(model => model.Details.City.Name));

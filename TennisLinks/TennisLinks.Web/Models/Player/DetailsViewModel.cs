@@ -35,6 +35,8 @@ namespace TennisLinks.Web.Models.Player
 
         public string City { get; set; }
 
+        public string ImageUrl { get; set; }
+
         public string Club { get; set; }
 
         public string PlayTime { get; set; }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
+using System.Web.Mvc;
 using TennisLinks.Models.Attributes;
 
 namespace TennisLinks.Web.Models.Player
@@ -25,11 +27,17 @@ namespace TennisLinks.Web.Models.Player
 
         public string Club { get; set; }
 
-        public List<string> AllClubs { get; set; }
+        [Display(Name = "Profile picture")]
+        [ImageValidation(ErrorMessage="Only image types. Filesize must be > 0.5kb and < 1mb!")]
+        public HttpPostedFileBase Image { get; set; }
 
         [Display(Name = "Available to play")]
         public string PlayTime { get; set; }
 
-        public List<string> AllPlayTimes { get; set; }
+        public IEnumerable<string> AllCities { get; set; }
+
+        public IEnumerable<string> AllClubs { get; set; }
+
+        public IEnumerable<string> AllPlayTimes { get; set; }
     }
 }

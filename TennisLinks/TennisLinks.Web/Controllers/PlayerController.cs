@@ -12,6 +12,7 @@ using TennisLinks.Web.Models.Home;
 using TennisLinks.Web.Models.Player;
 using TennisLinks.Models.Extensions;
 using TennisLinks.Web.Infrastructure;
+using System.IO;
 
 namespace TennisLinks.Web.Controllers
 {
@@ -51,12 +52,8 @@ namespace TennisLinks.Web.Controllers
 
             if (username != null && username is string)
             {
-                var id = Guid.Parse(this.User.Identity.GetDetailsId());
-                var favorites = this.favorService
-                    .GetAll()
-                    .Where(f => f.Details_Id == id)
-                    .Select(f => f.UserName)
-                    .ToList();
+                var detailsId = this.User.Identity.GetDetailsId();
+                var favorites = this.favorService.AllNamesPerUserId(Guid.Parse(detailsId));
 
                 user = this.userService
                     .GetAll()
@@ -64,25 +61,31 @@ namespace TennisLinks.Web.Controllers
                     .MapTo<UserSearchResultViewModel>()
                     .First();
 
-                    if (favorites.Contains(user.UserName))
-                    {
+                if (favorites.Contains(user.UserName))
+                {
                     user.Favorite = true;
-                    }
-                    else
-                    {
+                }
+                else
+                {
                     user.Favorite = false;
-                    }
+                }
 
+                user.Favorites = favorites;
             }
-            else
+            else // does not work
             {
-                 var id = this.User.Identity.GetUserId();
+                var detailsId = this.User.Identity.GetDetailsId();
+                var favorites = this.favorService.AllNamesPerUserId(Guid.Parse(detailsId));
 
-                 user = this.userService
+                var idString = this.User.Identity.GetUserId();
+                var id = Guid.Parse(idString);
+                user = this.userService
                     .GetAll()
-                    .Where(u => u.Id == id)
+                    .Where(u => u.Id == idString)
                     .MapTo<UserSearchResultViewModel>()
                     .First();
+
+                user.Favorites = favorites;
             }
 
             return View(user);
@@ -95,20 +98,15 @@ namespace TennisLinks.Web.Controllers
         {
             ViewBag.UserName = this.User.Identity.GetUserName();
 
-            var allClubs = this.clubService
-                .GetAll()
-                .Select(x => x.Name)
-                .ToList();
-
-            var allPlayTimes = this.playTimeService
-                .GetAll()
-                .Select(x => x.Time.ToString())
-                .ToList();
+            var allClubs = this.clubService.GetAllNames();
+            var allCities = this.cityService.GetAllNames();
+            var allPlayTimes = this.playTimeService.GetAllTimes();
 
             var viewDetails = new UpdateDetailsBindModel()
             {
                 AllPlayTimes = allPlayTimes,
                 AllClubs = allClubs,
+                AllCities = allCities,
                 Club = "",
                 PlayTime = ""
             };
@@ -204,6 +202,21 @@ namespace TennisLinks.Web.Controllers
             {
                 details.Skill = 1;
             }
+
+
+            if (model.Image != null && this.ModelState.IsValid)
+            {
+                ViewBag.ImageError = null;
+                var fileName = Path.GetFileName(model.Image.FileName);
+                var path = Path.Combine(Server.MapPath("~/Content/Uploaded"), fileName);
+                model.Image.SaveAs(path);
+                details.ImageUrl = $"/Content/Uploaded/{fileName}";
+            }
+            else
+            {
+                details.ImageUrl = "/Content/Images/tennis-default.png";
+            }
+
 
             var result = this.detailsService.Update(details);
 

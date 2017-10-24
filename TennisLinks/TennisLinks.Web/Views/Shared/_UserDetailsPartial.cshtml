@@ -5,8 +5,8 @@
 
 <div class="player-details-wrapper grid-item">
     <div class="player-details">
-        <img src="~/Content/Images/tennis-default.png" alt="Player" />
-        <h2>@Model.UserName</h2>
+        <img src="@Model.ImageUrl" alt="Player" />
+        <h2 class="main-greeting">@Model.UserName</h2>
         @if (Model.Favorite)
         {
             <span id="star-@Model.UserName" class="glyphicon glyphicon-star" aria-hidden="true"></span>

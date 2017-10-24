@@ -30,15 +30,26 @@ namespace TennisLinks.Web.Controllers
         // TODO: do with ajax
         public ActionResult Add(string userName)
         {
+            var id = Guid.Parse(this.User.Identity.GetDetailsId());
+            var current = this.favService.AllNamesPerUserId(id);
+
+            if (current.Contains(userName))
+            {
+                return Redirect(Request.UrlReferrer.ToString());
+            }
+
             var favorite = new Favorite() { UserName = userName, Details_Id = Guid.Parse(this.User.Identity.GetDetailsId())};
             this.favService.Add(favorite);
-            return this.RedirectToAction("All", "Home");
+
+            return Redirect(Request.UrlReferrer.ToString());
+            //return this.RedirectToAction("All", "Home");
         }
 
         // TODO: do with ajax
         public ActionResult Remove(string userName)
         {
             var id = Guid.Parse(this.User.Identity.GetDetailsId());
+
             var favorite = favService
                 .GetAll()
                 .Where(f => f.Details_Id == id && f.UserName == userName)
@@ -48,10 +59,11 @@ namespace TennisLinks.Web.Controllers
 
             if (result < 0)
             {
-                // todo
+                return Redirect(Request.UrlReferrer.ToString());
             }
 
-            return this.RedirectToAction("All", "Home");
+            return Redirect(Request.UrlReferrer.ToString());
+            //return this.RedirectToAction("All", "Home");
         }
     }
 }

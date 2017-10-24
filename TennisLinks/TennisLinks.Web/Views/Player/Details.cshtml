@@ -20,70 +20,77 @@ else
 }
 
 <hr />
-<div>
-    <table class="user-details-table table-striped">
-        <tr>
-            <th scope="row">Username:</th>
-            <td>@Model.UserName</td>
-        </tr>
-        <tr>
-            <th scope="row">E-mail:</th>
-            <td> @Model.Email</td>
-        </tr>
-        <tr>
-            <th scope="row">Age:</th>
-            <td>@{ var age = Model.Age > 0 ? Model.Age.ToString() : "No age specified.";} @age</td>
-        </tr>
-        <tr>
-            <th scope="row">Gender:</th>
-            <td>@{ var gender = Model.Gender != null ? Model.Gender : "No gender specified.";} @gender</td>
-        </tr>
-        <tr>
-            <th scope="row">Skill level:</th>
-            <td>@Model.Skill</td>
-        </tr>
-        <tr>
-            <th scope="row">City:</th>
-            <td>@{ var city = Model.City != null ? Model.City : "No city provided";} @city</td>
-        </tr>
-        <tr>
-            <th scope="row">Clubs:</th>
-            <td>@{ var club = Model.Club != null ? Model.Club : "You have no favorite club."; } @club</td>
-        </tr>
-        <tr>
-            <th scope="row">Available for play:</th>
-            <td>
-                @{var time = Model.PlayTime != null ? Model.PlayTime : "You did not specify available time.";} @time
-            </td>
-        </tr>
-        @*<tr>
+<div class="row">
+    <div class="details-image images-box-wrapper col-sm-4">
+        <div class="home-image">
+            <img src="@Model.ImageUrl" alt="avatar" />
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <table class="user-details-table table-striped">
+            <tr>
+                <th scope="row">Username:</th>
+                <td>@Model.UserName</td>
+            </tr>
+            <tr>
+                <th scope="row">E-mail:</th>
+                <td> @Model.Email</td>
+            </tr>
+            <tr>
+                <th scope="row">Age:</th>
+                <td>@{ var age = Model.Age > 0 ? Model.Age.ToString() : "No age specified.";} @age</td>
+            </tr>
+            <tr>
+                <th scope="row">Gender:</th>
+                <td>@{ var gender = Model.Gender != null ? Model.Gender : "No gender specified.";} @gender</td>
+            </tr>
+            <tr>
+                <th scope="row">Skill level:</th>
+                <td>@Model.Skill</td>
+            </tr>
+            <tr>
+                <th scope="row">City:</th>
+                <td>@{ var city = Model.City != null ? Model.City : "No city provided";} @city</td>
+            </tr>
+            <tr>
+                <th scope="row">Clubs:</th>
+                <td>@{ var club = Model.Club != null ? Model.Club : "You have no favorite club."; } @club</td>
+            </tr>
+            <tr>
+                <th scope="row">Available for play:</th>
+                <td>
+                    @{var time = Model.PlayTime != null ? Model.PlayTime : "You did not specify available time.";} @time
+                </td>
+            </tr>
+            <tr>
                 <th scope="row">Favorite players:</th>
                 <td>
                     @{var players = Model.Favorites != null && Model.Favorites.Count() > 0 ? string.Join(", ", @Model.Favorites) : "You have no favorite players.";} @players
                 </td>
-            </tr>*@
-        <tr>
-            <th scope="row">Personal info:</th>
-            <td> @Model.Info</td>
-        </tr>
-    </table>
+            </tr>
+            <tr>
+                <th scope="row">Personal info:</th>
+                <td> @Model.Info</td>
+            </tr>
+        </table>
 
-    @if (Model.UserName == @User.Identity.GetUserName())
-    {
-        <a href="/player/updatedetails" class="btn btn-primary">UPDATE YOUR INFO HERE</a>
-        <a href="/manage" class="orange-button btn btn-warning">OTHER OPTIONS</a>
-    }
-    else
-    {
-        <a href="/messages/write?recipient=@Model.UserName" current="@User.Identity.GetUserName()" id="msg-@Model.UserName" class="write-message btn btn-warning">MESSAGE</a>
-
-        if (!Model.Favorite)
+        @if (Model.UserName == @User.Identity.GetUserName())
         {
-            <a href="/favorites/add?username=@Model.UserName" id="add-@Model.UserName" class="btn btn-success">FAVOURITE</a>
+            <a href="/player/updatedetails" class="btn btn-primary">UPDATE YOUR INFO</a>
+            <a href="/manage" class="orange-button btn btn-warning">OTHER OPTIONS</a>
         }
         else
         {
-            <a href="/favorites/remove?username=@Model.UserName" id="rem-@Model.UserName" class="btn btn-default">UNFAVOUR</a>
+            <a href="/messages/write?recipient=@Model.UserName" current="@User.Identity.GetUserName()" id="msg-@Model.UserName" class="write-message btn btn-warning">MESSAGE</a>
+
+            if (!Model.Favorite)
+            {
+                <a href="/favorites/add?username=@Model.UserName" id="add-@Model.UserName" class="btn btn-success">FAVOURITE</a>
+            }
+            else
+            {
+                <a href="/favorites/remove?username=@Model.UserName" id="rem-@Model.UserName" class="btn btn-default">UNFAVOUR</a>
+            }
         }
-    }
+    </div>
 </div>
