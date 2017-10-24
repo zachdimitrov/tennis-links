@@ -30,27 +30,27 @@ namespace TennisLinks.Web.Tests.Controllers.HomeTests
             Assert.IsNotNull(controllerUT);
         }
 
-        [Test]
-        public void ReturnCorrect_Index_View()
-        {
-            // Arrange
-            var userServiceMock = new Mock<IUserService>();
-            var favServiceMock = new Mock<IFavoriteService>();
-            var clubServiceMock = new Mock<IClubService>();
-            var cityServiceMock = new Mock<ICityService>();
+        //[Test]
+        //public void ReturnCorrect_Index_View()
+        //{
+        //    // Arrange
+        //    var userServiceMock = new Mock<IUserService>();
+        //    var favServiceMock = new Mock<IFavoriteService>();
+        //    var clubServiceMock = new Mock<IClubService>();
+        //    var cityServiceMock = new Mock<ICityService>();
 
-            var controllerUT = new HomeController(
-                userServiceMock.Object,
-                favServiceMock.Object,
-                clubServiceMock.Object,
-                cityServiceMock.Object);
+        //    var controllerUT = new HomeController(
+        //        userServiceMock.Object,
+        //        favServiceMock.Object,
+        //        clubServiceMock.Object,
+        //        cityServiceMock.Object);
 
-            // Act
-            var result = controllerUT.Index() as ViewResult;
+        //    // Act
+        //    var result = controllerUT.Index() as ViewResult;
 
-            // Assert
-            Assert.AreEqual("Index", result.ViewName);
-        }
+        //    // Assert
+        //    Assert.AreEqual("Index", result.ViewName);
+        //}
 
         [Test]
         public void ReturnCorrect_About_View()
