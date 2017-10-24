@@ -1,5 +1,6 @@
 ﻿@using TennisLinks.Web.Models.Home
-@model HomeViewModel
+@using Microsoft.AspNet.Identity
+@model List<HomeViewModel>
 
 @{
     ViewBag.Title = "Home Page";
@@ -17,27 +18,26 @@
     }
 
 </div>
+<h2 class="title-images-header">Latest user images</h2>
 <div class="images-box row">
+    @for (var i = 0; i < 4; i++)
+    {
     <div class="images-box-wrapper col-xs-6 col-sm-3">
         <div class="home-image">
-            <img src="~/Content/Images/Capture1.png" alt="home image" />
+            @if (@Model[i].UserName != "sample")
+            {
+            <a href="/player/details?username=@Model[i].UserName">
+                <p class="home-user-image">view profile</p>
+                <img src="@Model[i].ImageUrl" alt="home image" />
+            </a>
+            }
+            else
+            {
+                <img src="@Model[i].ImageUrl" alt="home image" />
+            }
         </div>
     </div>
-    <div class="images-box-wrapper col-xs-6 col-sm-3">
-        <div class="home-image">
-            <img src="~/Content/Images/Capture2.png" alt="home image" />
-        </div>
-    </div>
-    <div class="images-box-wrapper col-xs-6 col-sm-3">
-        <div class="home-image">
-            <img src="~/Content/Images/Capture3.png" alt="home image" />
-        </div>
-    </div>
-    <div class="images-box-wrapper col-xs-6 col-sm-3">
-        <div class="home-image">
-            <img src="~/Content/Images/Capture4.png" alt="home image" />
-        </div>
-    </div>
+    }
 </div>
 <div class="front-box row">
     <div class="fp-info-box col-md-4">
@@ -53,7 +53,7 @@
     <div class="fp-info-box col-md-4">
         <h2>Update your profile</h2>
         <p>If you didn't update your profile yet do it now and more people will contact you based on your skill level and personal info.</p>
-        <p><a class="btn btn-default fp-button" href="/player/details">Profile &raquo;</a></p>
+        <p><a class="btn btn-default fp-button" href="/player/details?username=@User.Identity.GetUserName()">Profile &raquo;</a></p>
     </div>
     <div class="fp-info-box col-md-4">
         <h2>Compare with other players</h2>

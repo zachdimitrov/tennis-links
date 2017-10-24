@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TennisLinks.Data.Interfaces;
 using TennisLinks.Models;
 using TennisLinks.Services.Interfaces;
@@ -37,6 +39,14 @@ namespace TennisLinks.Services
         {
             this.favsRepo.Delete(favorite);
             return this.context.Commit();
+        }
+
+        public IEnumerable<string> AllNamesPerUserId(Guid id)
+        {
+            return this.GetAll()
+                .Where(f => f.Details_Id == id)
+                .Select(f => f.UserName)
+                .ToList();
         }
     }
 }

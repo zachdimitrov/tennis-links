@@ -31,7 +31,21 @@ namespace TennisLinks.Web.Controllers
 
         public ActionResult Index()
         {
-            return View("Index");
+            var images = this.userService
+                .GetAll()
+                .OrderBy(d => d.CreatedOn)
+                .Where(i => i.Details.ImageUrl != "/Content/Images/tennis-default.png")
+                .MapTo<HomeViewModel>()
+                .ToList();
+
+                images.Reverse();
+
+            if(images.ElementAtOrDefault(0) == null) { images.Add(new HomeViewModel() { UserName = "sample", ImageUrl = "/Content/Images/Capture1.PNG" }); }
+            if(images.ElementAtOrDefault(1) == null) { images.Add(new HomeViewModel() { UserName = "sample", ImageUrl = "/Content/Images/Capture2.PNG" }); }
+            if(images.ElementAtOrDefault(2) == null) { images.Add(new HomeViewModel() { UserName = "sample", ImageUrl = "/Content/Images/Capture3.PNG" }); }
+            if(images.ElementAtOrDefault(3) == null) { images.Add(new HomeViewModel() { UserName = "sample", ImageUrl = "/Content/Images/Capture4.PNG" }); }
+
+            return View("Index", images);
         }
 
         // for ajax request
@@ -62,11 +76,7 @@ namespace TennisLinks.Web.Controllers
         public ActionResult All()
         {
             var id = Guid.Parse(this.User.Identity.GetDetailsId());
-            var favorites = this.favorService
-                .GetAll()
-                .Where(f => f.Details_Id == id)
-                .Select(f => f.UserName)
-                .ToList();
+            var favorites = this.favorService.AllNamesPerUserId(id);
 
             var users = this.userService
                 .GetAll()
@@ -112,11 +122,7 @@ namespace TennisLinks.Web.Controllers
             var cities = this.cityService.GetAllNames();
 
             var id = Guid.Parse(this.User.Identity.GetDetailsId());
-            var favorites = this.favorService
-                .GetAll()
-                .Where(f => f.Details_Id == id)
-                .Select(f => f.UserName)
-                .ToList();
+            var favorites = this.favorService.AllNamesPerUserId(id);
 
             var users = this.userService
                 .GetAll()

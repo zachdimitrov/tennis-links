@@ -25,6 +25,8 @@ namespace TennisLinks.Models
         [StringLength(250, MinimumLength = 10)]
         public string Info { get; set; }
 
+        public string ImageUrl { get; set; }
+
         [Column("Skill Level")]
         [SkillValidation]
         public double Skill { get; set; }

@@ -1,4 +1,5 @@
-﻿@model TennisLinks.Web.Models.Manage.IndexViewModel
+﻿@using Microsoft.AspNet.Identity
+@model TennisLinks.Web.Models.Manage.IndexViewModel
 @{
     ViewBag.Title = "Manage";
 }
@@ -27,7 +28,7 @@
         </dd>
         <dt>External Logins:</dt>
         <dd>
-            @Html.ActionLink("Update Your Details", "Details", "Player", null, new { @class = "btn btn-success" })
+            @Html.ActionLink("Update Your Details", "Details", "Player", new { username= User.Identity.GetUserName() }, new { @class = "btn btn-success" })
         </dd>
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.

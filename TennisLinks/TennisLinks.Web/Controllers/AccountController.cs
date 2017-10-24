@@ -168,6 +168,7 @@ namespace TennisLinks.Web.Controllers
                         City = null,
                         Skill = 1.0,
                         Club = null, 
+                        ImageUrl = "/Content/Images/tennis-default.png",
                         PlayTime = null,
                         Info = "No info for this user.",
                         CreatedOn = DateTime.Now
