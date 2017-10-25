@@ -129,7 +129,7 @@ namespace TennisLinks.Web.Controllers
                 .MapTo<UserSearchResultViewModel>()
                 .Where(x => (model.SearchUserName == null || 
                       x.UserName.ToLower().Contains(model.SearchUserName.ToLower())) &&
-                            (model.SearchSkill == 0 || x.Skill == model.SearchSkill) &&
+                            (model.SearchSkill == null || x.Skill == model.SearchSkill) &&
                             (model.SearchCity == null || x.City == model.SearchCity) &&
                             (model.SearchClub == null || x.Club == model.SearchClub) &&
                             (model.SearchTime == null ||

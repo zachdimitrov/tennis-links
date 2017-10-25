@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 using TennisLinks.Models.Attributes;
+using TennisLinks.Web.Models.Home;
 
 namespace TennisLinks.Web.Models.Player
 {

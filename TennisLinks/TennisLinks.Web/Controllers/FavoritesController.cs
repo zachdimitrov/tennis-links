@@ -32,17 +32,25 @@ namespace TennisLinks.Web.Controllers
         {
             var id = Guid.Parse(this.User.Identity.GetDetailsId());
             var current = this.favService.AllNamesPerUserId(id);
+            var currentDeleted = this.favService.AllDeletedNamesPerUserId(id);
 
             if (current.Contains(userName))
             {
-                return Redirect(Request.UrlReferrer.ToString());
+                return this.Redirect(Request.UrlReferrer.ToString());
+            }
+
+            if (currentDeleted.Contains(userName))
+            {
+                var fav = this.favService.GetDeletedByUsername(id, userName);
+                fav.IsDeleted = false;
+                this.favService.Update(fav);
+                return this.Redirect(Request.UrlReferrer.ToString());
             }
 
             var favorite = new Favorite() { UserName = userName, Details_Id = Guid.Parse(this.User.Identity.GetDetailsId())};
             this.favService.Add(favorite);
 
-            return Redirect(Request.UrlReferrer.ToString());
-            //return this.RedirectToAction("All", "Home");
+            return this.Redirect(Request.UrlReferrer.ToString());
         }
 
         // TODO: do with ajax
@@ -50,20 +58,16 @@ namespace TennisLinks.Web.Controllers
         {
             var id = Guid.Parse(this.User.Identity.GetDetailsId());
 
-            var favorite = favService
-                .GetAll()
-                .Where(f => f.Details_Id == id && f.UserName == userName)
-                .FirstOrDefault();
+            var fav = this.favService.GetByUsername(id, userName);
 
-            var result = favService.Delete(favorite);
+            var result = favService.Delete(fav);
 
             if (result < 0)
             {
-                return Redirect(Request.UrlReferrer.ToString());
+                return this.Redirect(Request.UrlReferrer.ToString());
             }
 
-            return Redirect(Request.UrlReferrer.ToString());
-            //return this.RedirectToAction("All", "Home");
+            return this.Redirect(Request.UrlReferrer.ToString());
         }
     }
 }

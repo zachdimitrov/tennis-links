@@ -9,7 +9,7 @@ namespace TennisLinks.Web.Models.Home
         public string SearchUserName { get; set; }
 
         [Display(Name = "Skill")]
-        public double SearchSkill { get; set; }
+        public double? SearchSkill { get; set; }
 
         [Display(Name = "City")]
         public string SearchCity { get; set; }

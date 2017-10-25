@@ -44,9 +44,31 @@ namespace TennisLinks.Services
         public IEnumerable<string> AllNamesPerUserId(Guid id)
         {
             return this.GetAll()
-                .Where(f => f.Details_Id == id)
+                .Where(f => f.Details_Id == id && f.IsDeleted == false)
                 .Select(f => f.UserName)
                 .ToList();
+        }
+
+        public IEnumerable<string> AllDeletedNamesPerUserId(Guid id)
+        {
+            return this.favsRepo.AllAndDeleted
+                .Where(f => f.Details_Id == id && f.IsDeleted == true)
+                .Select(f => f.UserName)
+                .ToList();
+        }
+
+        public Favorite GetByUsername(Guid id, string userName)
+        {
+            return this.GetAll()
+                .Where(f => f.Details_Id == id && f.UserName == userName)
+                .FirstOrDefault();
+        }
+
+        public Favorite GetDeletedByUsername(Guid id, string userName)
+        {
+            return this.favsRepo.AllAndDeleted
+                .Where(f => f.Details_Id == id && f.UserName == userName)
+                .FirstOrDefault();
         }
     }
 }
