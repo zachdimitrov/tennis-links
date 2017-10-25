@@ -12,5 +12,8 @@ namespace TennisLinks.Services.Interfaces
         int Delete(Favorite favorite);
         IQueryable<Favorite> GetAll();
         IEnumerable<string> AllNamesPerUserId(Guid id);
+        IEnumerable<string> AllDeletedNamesPerUserId(Guid id);
+        Favorite GetByUsername(Guid id, string userName);
+        Favorite GetDeletedByUsername(Guid id, string userName);
     }
 }
