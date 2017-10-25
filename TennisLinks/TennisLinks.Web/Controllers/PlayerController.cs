@@ -48,45 +48,7 @@ namespace TennisLinks.Web.Controllers
         [HttpGet]
         public ActionResult Details(string username)
         {
-            UserSearchResultViewModel user = null;
-
-            if (username != null && username is string)
-            {
-                var detailsId = this.User.Identity.GetDetailsId();
-                var favorites = this.favorService.AllNamesPerUserId(Guid.Parse(detailsId));
-
-                user = this.userService
-                    .GetAll()
-                    .Where(u => u.UserName == username)
-                    .MapTo<UserSearchResultViewModel>()
-                    .First();
-
-                if (favorites.Contains(user.UserName))
-                {
-                    user.Favorite = true;
-                }
-                else
-                {
-                    user.Favorite = false;
-                }
-
-                user.Favorites = favorites;
-            }
-            else // does not work
-            {
-                var detailsId = this.User.Identity.GetDetailsId();
-                var favorites = this.favorService.AllNamesPerUserId(Guid.Parse(detailsId));
-
-                var idString = this.User.Identity.GetUserId();
-                var id = Guid.Parse(idString);
-                user = this.userService
-                    .GetAll()
-                    .Where(u => u.Id == idString)
-                    .MapTo<UserSearchResultViewModel>()
-                    .First();
-
-                user.Favorites = favorites;
-            }
+            var user = _CreateUserModel(username);
 
             return View(user);
         }
@@ -96,7 +58,10 @@ namespace TennisLinks.Web.Controllers
         [HttpGet]
         public ActionResult UpdateDetails()
         {
-            ViewBag.UserName = this.User.Identity.GetUserName();
+            var userName = this.User.Identity.GetUserName();
+            ViewBag.UserName = userName;
+
+            var user = _CreateUserModel(userName);
 
             var allClubs = this.clubService.GetAllNames();
             var allCities = this.cityService.GetAllNames();
@@ -107,8 +72,13 @@ namespace TennisLinks.Web.Controllers
                 AllPlayTimes = allPlayTimes,
                 AllClubs = allClubs,
                 AllCities = allCities,
-                Club = "",
-                PlayTime = ""
+                City = user.City,
+                Age = user.Age, 
+                Gender = user.Gender,
+                Club = user.Club,
+                PlayTime = user.PlayTime,
+                SkillLevel = user.Skill,
+                Info = user.Info,
             };
 
             return View(viewDetails);
@@ -236,6 +206,27 @@ namespace TennisLinks.Web.Controllers
         public HttpStatusCodeResult ClubValidationFailure(string name)
         {
             return new HttpStatusCodeResult(HttpStatusCode.BadRequest, $"Club \"{name}\" does not exist. Add it first.");
+        }
+
+        private UserSearchResultViewModel _CreateUserModel(string username)
+        {
+            UserSearchResultViewModel user = null;
+
+            if (username != null && username is string)
+            {
+                var detailsId = this.User.Identity.GetDetailsId();
+                var favorites = this.favorService.AllNamesPerUserId(Guid.Parse(detailsId));
+
+                user = this.userService
+                    .GetAll()
+                    .Where(u => u.UserName == username)
+                    .MapTo<UserSearchResultViewModel>()
+                    .First();
+
+                user.Favorites = favorites;
+            }
+
+            return user;
         }
     }
 }
